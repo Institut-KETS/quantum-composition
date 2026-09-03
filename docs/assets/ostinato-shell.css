@@ -1,0 +1,95 @@
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  left: 12px;
+  padding: 9px 13px;
+  color: #ffffff;
+  background: #111111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+.cookbook-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 20px;
+  align-items: center;
+  margin: 0 0 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cookbook-nav a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.cookbook-nav a:hover { color: #d9541e; }
+
+.cookbook-nav a[aria-current="page"] {
+  color: #d9541e;
+  text-decoration: none;
+}
+
+.cookbook-nav a:focus-visible,
+.site-footer a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.site-footer {
+  margin-top: 48px;
+  border-top: 1px solid #dfe3e5;
+  background: #f5f7f8;
+  color: #202427;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+.footer-inner {
+  display: flex;
+  width: min(1120px, calc(100% - 40px));
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 28px 0;
+  font-size: 0.85rem;
+}
+
+.footer-inner p { margin: 0; color: #646b70; }
+
+.footer-inner nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px 20px;
+}
+
+.site-footer a {
+  color: #59676e;
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: rgba(89, 103, 110, 0.52);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.site-footer a:hover { color: #183e50; text-decoration-color: currentColor; }
+
+@media (max-width: 720px) {
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    width: min(100% - 28px, 680px);
+  }
+
+  .footer-inner nav { justify-content: flex-start; }
+}

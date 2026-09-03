@@ -1,0 +1,19 @@
+Salamander Grand Piano — Alexander Holm
+Recorded Yamaha C5 grand piano; samples distributed by Tone.js.
+
+Source and original attribution:
+https://github.com/Tonejs/audio/tree/master/salamander
+https://github.com/Tonejs/audio/blob/master/salamander/README
+
+License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/
+
+Files copied without modification from:
+https://tonejs.github.io/audio/salamander/C4.mp3
+https://tonejs.github.io/audio/salamander/Ds4.mp3
+https://tonejs.github.io/audio/salamander/Fs4.mp3
+https://tonejs.github.io/audio/salamander/C5.mp3
+
+During playback, D-sharp4 and F-sharp4 are transposed up one semitone
+to E4 and G4. Volume and note-release envelopes are applied at playback.
+No endorsement by the sample author is implied.

@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Qubit Ostinato: an interactive infinite prefix-consistent quantum score for the Quantum Composition project.">
+  <meta name="theme-color" content="#111111">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Qubit Ostinato">
+  <meta property="og:description" content="An interactive infinite prefix-consistent quantum score.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Qubit Ostinato">
+  <meta name="twitter:description" content="An interactive infinite prefix-consistent quantum score.">
+  <title>Qubit Ostinato — the infinity chain</title>
+  <link rel="stylesheet" href="assets/ostinato-shell.css">
+  <style>
+    :root {
+      --ink: #111111;
+      --paper: #ffffff;
+      --line: #c9c7c1;
+      --blue: #1f5d85;
+      --red: #b31537;
+      --green: #176b42;
+      --orange: #d9541e;
+      --soft-green: #edf7f1;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 42px;
+    }
+
+    header {
+      max-width: 850px;
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--orange);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7vw, 82px);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 0.98;
+    }
+
+    .deck {
+      margin: 18px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 1.35;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(430px, 1.1fr);
+      gap: clamp(30px, 5vw, 68px);
+      align-items: center;
+      padding-top: 28px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .current-box {
+      padding: 18px 20px;
+      border: 2px solid var(--green);
+      background: var(--soft-green);
+    }
+
+    .current-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .current-size {
+      margin: 14px 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+    }
+
+    .readout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .readout span {
+      display: block;
+      margin-bottom: 4px;
+      color: #555555;
+      font-size: 12px;
+    }
+
+    .readout strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 19px;
+    }
+
+    .current-detail {
+      margin: 15px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    button {
+      width: 100%;
+      min-height: 60px;
+      margin-top: 18px;
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      background: var(--ink);
+      color: var(--paper);
+      cursor: pointer;
+      font: inherit;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    button:hover { background: #333333; }
+
+    .status {
+      min-height: 50px;
+      margin: 15px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .sphere {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .sphere .shell,
+    .sphere .equator,
+    .sphere .axis {
+      fill: none;
+      stroke: var(--ink);
+      stroke-width: 1.6;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .sphere .equator {
+      stroke: #8d8d8d;
+      stroke-dasharray: 6 5;
+    }
+
+    .sphere .axis {
+      stroke: #999999;
+      stroke-width: 1;
+    }
+
+    .sphere text {
+      fill: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .target-latitude {
+      fill: none;
+      stroke: var(--green);
+      stroke-width: 2;
+      stroke-dasharray: 6 5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .vector {
+      stroke-width: 3.5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .point {
+      stroke: var(--ink);
+      stroke-width: 1.5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .prefix { fill: var(--blue); stroke: var(--blue); }
+    .next-note { fill: var(--red); stroke: var(--red); }
+
+    .sphere-legend,
+    .trajectory-key {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px 22px;
+      margin-top: -3px;
+      font-size: 13px;
+    }
+
+    .sphere-legend i,
+    .trajectory-key i {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .sphere-legend .note-key i,
+    .trajectory-key .f-key i { background: var(--red); }
+
+    .sphere-legend .target-key i {
+      width: 21px;
+      height: 0;
+      border-top: 2px dashed var(--green);
+      border-radius: 0;
+      background: none;
+      vertical-align: middle;
+    }
+
+    .coordinates {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 26px;
+      margin-top: 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+    }
+
+    .trajectory {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(8, minmax(58px, 1fr));
+      gap: 14px;
+      margin: 32px 0 0;
+    }
+
+    .trajectory::before {
+      content: "";
+      position: absolute;
+      top: 48px;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .trajectory-step {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .gate-label {
+      display: block;
+      margin-bottom: 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+    }
+
+    .trajectory-dot {
+      display: grid;
+      place-items: center;
+      width: 62px;
+      height: 62px;
+      margin: 0 auto;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--paper);
+      font-weight: 700;
+      transition: background 120ms ease, color 120ms ease, transform 120ms ease;
+    }
+
+    .trajectory-dot.playing { transform: scale(1.08); }
+    .trajectory-dot.e { background: var(--blue); color: var(--paper); }
+    .trajectory-dot.f { background: var(--red); color: var(--paper); }
+    .trajectory-dot.placeholder { color: #777777; }
+
+    .trajectory-key {
+      justify-content: flex-start;
+      margin-top: 12px;
+    }
+
+    .flow {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .flow-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+    }
+
+    .flow-head h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .flow-head span { font-size: 14px; }
+
+    .flow-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+      overflow: visible;
+    }
+
+    .sample-line {
+      fill: none;
+      stroke: rgba(17,17,17,0.2);
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+      transition: stroke 200ms ease, stroke-width 200ms ease;
+    }
+
+    .sample-line.latest-e { stroke: var(--blue); stroke-width: 2.2; }
+    .sample-line.latest-f { stroke: var(--red); stroke-width: 2.2; }
+
+    .state-node {
+      fill: var(--paper);
+      stroke: var(--ink);
+      stroke-width: 2;
+    }
+
+    .flow-canvas text {
+      fill: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .time-label {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .state-label {
+      font-family: Georgia, "Times New Roman", serif !important;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .flow-count {
+      min-height: 22px;
+      margin: 3px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+    }
+
+    @media (max-width: 820px) {
+      main { width: min(100% - 28px, 680px); padding-top: 34px; }
+      .two-col { grid-template-columns: 1fr; }
+      .sphere-wrap { grid-row: 1; }
+      .controls { grid-row: 2; }
+      .trajectory { grid-template-columns: repeat(4, 1fr); row-gap: 18px; }
+      .trajectory::before { display: none; }
+      .flow { overflow-x: auto; }
+      .flow-canvas { min-width: 760px; }
+    }
+
+    @media (max-width: 430px) {
+      .readout { grid-template-columns: 1fr 1fr; }
+      .trajectory { grid-template-columns: repeat(2, 1fr); }
+      .flow-head { align-items: flex-start; flex-direction: column; gap: 3px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to demonstration</a>
+  <main>
+    <nav class="cookbook-nav" aria-label="Quantum music demonstrations">
+      <a href="index.html">Quantum Composition</a>
+      <a href="qubit-ostinato.html" aria-current="page">Qubit Ostinato</a>
+      <a href="index.html#files">Project resources</a>
+    </nav>
+    <header id="main">
+      <p class="eyebrow">The quantum music paradox</p>
+      <h1>Qubit Ostinato</h1>
+      <p class="deck">The familiar E–F semitone becomes an infinite quantum score. Every unitary note switches the two sounds with probability 3/4, while every finite prefix remains compositionally faithful.</p>
+    </header>
+
+    <section class="two-col" aria-label="Qubit Ostinato infinity-chain player">
+      <div class="controls">
+        <div class="current-box">
+          <div class="current-heading"><span>Every finite prefix</span><strong>target: ν<sub>F,k</sub> = 0</strong></div>
+          <div class="current-size">current ν<sub>F,k</sub> = <output id="current">0</output></div>
+          <div class="readout">
+            <div><span>prefix</span><strong id="prefix">ready</strong></div>
+            <div><span>mixing λ<sub>k</sub></span><strong>−1/2</strong></div>
+            <div><span>prefix product</span><strong id="product">1</strong></div>
+          </div>
+          <p class="current-detail" id="detail">Ready: the first Qubit Ostinato note lies on the zero set.</p>
+        </div>
+        <button id="play" type="button" aria-pressed="false">▶ Play forever</button>
+        <p class="status" id="status" aria-live="polite">Each playback samples a new E–F trajectory while the quantum prefix follows the green Born target.</p>
+      </div>
+
+      <div class="sphere-wrap">
+        <svg class="sphere" viewBox="0 0 440 330" role="img" aria-labelledby="sphere-title sphere-desc">
+          <title id="sphere-title">Qubit Ostinato infinity chain on a Bloch sphere</title>
+          <desc id="sphere-desc">The blue accumulated quantum prefix meets the green stochastic target latitude while the red next unitary note is selected from the zero set.</desc>
+          <circle class="shell" cx="220" cy="155" r="115"></circle>
+          <ellipse class="equator" cx="220" cy="155" rx="115" ry="39"></ellipse>
+          <line class="axis" x1="110" y1="195" x2="330" y2="115"></line>
+          <line class="axis" x1="278" y1="196" x2="162" y2="114"></line>
+          <line class="axis" x1="220" y1="270" x2="220" y2="40"></line>
+          <text x="334" y="113">x</text><text x="151" y="110">y</text><text x="226" y="39">z</text>
+          <polyline class="target-latitude" id="target" points=""></polyline>
+          <line class="vector next-note" id="note-vector" x1="220" y1="155" x2="220" y2="40"></line>
+          <circle class="point next-note" id="note-point" cx="220" cy="40" r="7"></circle>
+          <line class="vector prefix" id="prefix-vector" x1="220" y1="155" x2="220" y2="40"></line>
+          <circle class="point prefix" id="prefix-point" cx="220" cy="40" r="7"></circle>
+        </svg>
+        <div class="sphere-legend">
+          <span><i></i>quantum prefix</span>
+          <span class="note-key"><i></i>next unitary note</span>
+          <span class="target-key"><i></i>stochastic target</span>
+        </div>
+        <div class="coordinates">
+          <span><b>r</b><sub>k</sub> = <strong id="prefix-coordinates">(0, 0, 1)</strong></span>
+          <span><b>t</b><sub>k</sub> = <strong id="note-coordinates">(−0.866, 0, −0.500)</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="trajectory" id="trajectory" aria-label="The eight most recent Qubit Ostinato sounds"></div>
+    <div class="trajectory-key"><span><i></i>outcome 0 — E2</span><span class="f-key"><i></i>outcome 1 — F2</span></div>
+
+    <section class="flow" aria-labelledby="flow-heading">
+      <div class="flow-head"><h2 id="flow-heading">Born-flow score — eight-note windows</h2><span>Qubit Ostinato keeps playing</span></div>
+      <svg class="flow-canvas" viewBox="0 0 920 290" role="img" aria-labelledby="flow-title flow-desc">
+        <title id="flow-title">Eight-step Born-flow score for Qubit Ostinato</title>
+        <desc id="flow-desc">Each eight-note window deposits one sampled path across eight E and F columns.</desc>
+        <g id="flow-lines"></g>
+        <text class="time-label" x="70" y="28" text-anchor="middle">U1</text>
+        <text class="time-label" x="180" y="28" text-anchor="middle">U2</text>
+        <text class="time-label" x="290" y="28" text-anchor="middle">U3</text>
+        <text class="time-label" x="400" y="28" text-anchor="middle">U4</text>
+        <text class="time-label" x="510" y="28" text-anchor="middle">U5</text>
+        <text class="time-label" x="620" y="28" text-anchor="middle">U6</text>
+        <text class="time-label" x="730" y="28" text-anchor="middle">U7</text>
+        <text class="time-label" x="840" y="28" text-anchor="middle">U8</text>
+        <circle class="state-node" cx="70" cy="78" r="6"></circle><circle class="state-node" cx="70" cy="220" r="6"></circle>
+        <circle class="state-node" cx="180" cy="78" r="6"></circle><circle class="state-node" cx="180" cy="220" r="6"></circle>
+        <circle class="state-node" cx="290" cy="78" r="6"></circle><circle class="state-node" cx="290" cy="220" r="6"></circle>
+        <circle class="state-node" cx="400" cy="78" r="6"></circle><circle class="state-node" cx="400" cy="220" r="6"></circle>
+        <circle class="state-node" cx="510" cy="78" r="6"></circle><circle class="state-node" cx="510" cy="220" r="6"></circle>
+        <circle class="state-node" cx="620" cy="78" r="6"></circle><circle class="state-node" cx="620" cy="220" r="6"></circle>
+        <circle class="state-node" cx="730" cy="78" r="6"></circle><circle class="state-node" cx="730" cy="220" r="6"></circle>
+        <circle class="state-node" cx="840" cy="78" r="6"></circle><circle class="state-node" cx="840" cy="220" r="6"></circle>
+        <text class="state-label" x="42" y="86" text-anchor="end">E</text>
+        <text class="state-label" x="42" y="228" text-anchor="end">F</text>
+        <text class="state-label" x="868" y="86">E</text>
+        <text class="state-label" x="868" y="228">F</text>
+      </svg>
+      <p class="flow-count" id="flow-count">No eight-note paths yet.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Quantum Composition · Interactive research demonstration</p>
+      <nav aria-label="Footer navigation">
+        <a href="index.html">Project home</a>
+        <a href="https://github.com/Institut-KETS/quantum-composition" target="_blank" rel="noopener noreferrer">Project source ↗</a>
+        <a href="#top">Back to top ↑</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const THETA = 2 * Math.PI / 3;
+      const LAMBDA = -1 / 2;
+      const TEMPO = 650;
+      const MOTION_DURATION = 500;
+      const xPositions = [70, 180, 290, 400, 510, 620, 730, 840];
+      const timers = [];
+      let playing = false;
+      let audioContext = null;
+      let flowCount = 0;
+      let state = null;
+      let sphereState = null;
+      const animationFrames = { prefix: null, note: null, target: null };
+
+      const vector = {
+        dot: (a, b) => a.x * b.x + a.y * b.y + a.z * b.z,
+        cross: (a, b) => ({ x: a.y * b.z - a.z * b.y, y: a.z * b.x - a.x * b.z, z: a.x * b.y - a.y * b.x }),
+        norm: (a) => Math.hypot(a.x, a.y, a.z),
+        scale: (a, scalar) => ({ x: a.x * scalar, y: a.y * scalar, z: a.z * scalar }),
+        add: (a, b) => ({ x: a.x + b.x, y: a.y + b.y, z: a.z + b.z }),
+        unit: (a) => {
+          const norm = Math.hypot(a.x, a.y, a.z);
+          return norm < 1e-14 ? { x: 0, y: 0, z: 1 } : { x: a.x / norm, y: a.y / norm, z: a.z / norm };
+        }
+      };
+
+      function rotateVectorFromTo(value, from, to) {
+        const source = vector.unit(from);
+        const target = vector.unit(to);
+        const cross = vector.cross(source, target);
+        const sine = vector.norm(cross);
+        const cosine = Math.max(-1, Math.min(1, vector.dot(source, target)));
+        if (sine < 1e-12) {
+          if (cosine > 0) return { ...value };
+          return { x: value.x, y: -value.y, z: -value.z };
+        }
+        const axis = vector.scale(cross, 1 / sine);
+        return vector.add(
+          vector.add(vector.scale(value, cosine), vector.scale(vector.cross(axis, value), sine)),
+          vector.scale(axis, vector.dot(axis, value) * (1 - cosine))
+        );
+      }
+
+      function computeStep(snapshot) {
+        const index = snapshot.step + 1;
+        const transverseSize = Math.sin(THETA);
+        let readablePoint;
+        let nextPrefix;
+        let localDefect = 0;
+
+        if (index === 1) {
+          readablePoint = { x: -transverseSize, y: 0, z: LAMBDA };
+          nextPrefix = { x: transverseSize, y: 0, z: LAMBDA };
+        } else {
+          const previousTransverse = { x: snapshot.prefix.x, y: snapshot.prefix.y, z: 0 };
+          const transverseNorm = vector.norm(previousTransverse);
+          const readableTransverse = {
+            x: -previousTransverse.y * transverseSize / transverseNorm,
+            y: previousTransverse.x * transverseSize / transverseNorm,
+            z: 0
+          };
+          readablePoint = { ...readableTransverse, z: LAMBDA };
+          localDefect = vector.dot(readableTransverse, previousTransverse);
+          nextPrefix = vector.unit(rotateVectorFromTo(snapshot.prefix, readablePoint, { x: 0, y: 0, z: 1 }));
+        }
+
+        const nextProduct = snapshot.lambdaProduct * LAMBDA;
+        const prefixDefect = nextPrefix.z - nextProduct;
+        const current = Math.max(Math.abs(localDefect), Math.abs(prefixDefect));
+        return { index, readablePoint: vector.unit(readablePoint), nextPrefix, nextProduct, current };
+      }
+
+      function project(point) {
+        return {
+          x: 220 + 112 * (0.86 * point.x - 0.46 * point.y),
+          y: 155 - 112 * (0.34 * point.x + 0.34 * point.y + 0.88 * point.z)
+        };
+      }
+
+      function formatCoordinates(point) {
+        const clean = (value) => Math.abs(value) < 5e-7 ? 0 : value;
+        return `(${clean(point.x).toFixed(3)}, ${clean(point.y).toFixed(3)}, ${clean(point.z).toFixed(3)})`;
+      }
+
+      function formatProduct(index, value) {
+        if (index === 0) return '1';
+        if (index <= 8) return `${index % 2 ? '−' : ''}1/${2 ** index}`;
+        return value.toExponential(2).replace('-', '−');
+      }
+
+      function drawSphereVector(prefix, point) {
+        const projected = project(point);
+        $(`${prefix}-vector`).setAttribute('x2', projected.x.toFixed(2));
+        $(`${prefix}-vector`).setAttribute('y2', projected.y.toFixed(2));
+        $(`${prefix}-point`).setAttribute('cx', projected.x.toFixed(2));
+        $(`${prefix}-point`).setAttribute('cy', projected.y.toFixed(2));
+        $(`${prefix}-coordinates`).textContent = formatCoordinates(point);
+      }
+
+      function drawTarget(zValue) {
+        const z = Math.max(-1, Math.min(1, zValue));
+        const radius = Math.sqrt(Math.max(0, 1 - z * z));
+        const points = [];
+        for (let index = 0; index <= 72; index += 1) {
+          const angle = 2 * Math.PI * index / 72;
+          const projected = project({ x: radius * Math.cos(angle), y: radius * Math.sin(angle), z });
+          points.push(`${projected.x.toFixed(2)},${projected.y.toFixed(2)}`);
+        }
+        $('target').setAttribute('points', points.join(' '));
+      }
+
+      function eased(progress) {
+        return progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      }
+
+      function animateVector(prefix, destination) {
+        if (animationFrames[prefix]) window.cancelAnimationFrame(animationFrames[prefix]);
+        const startPoint = { ...sphereState[prefix] };
+        const startedAt = performance.now();
+        const marker = $(`${prefix}-point`);
+        marker.setAttribute('r', prefix === 'prefix' ? '9' : '8');
+
+        const frame = (now) => {
+          const progress = Math.min(1, (now - startedAt) / MOTION_DURATION);
+          const amount = eased(progress);
+          const point = {
+            x: startPoint.x + (destination.x - startPoint.x) * amount,
+            y: startPoint.y + (destination.y - startPoint.y) * amount,
+            z: startPoint.z + (destination.z - startPoint.z) * amount
+          };
+          sphereState[prefix] = point;
+          drawSphereVector(prefix, point);
+          if (progress < 1) {
+            animationFrames[prefix] = window.requestAnimationFrame(frame);
+          } else {
+            sphereState[prefix] = { ...destination };
+            marker.setAttribute('r', '7');
+            animationFrames[prefix] = null;
+          }
+        };
+        animationFrames[prefix] = window.requestAnimationFrame(frame);
+      }
+
+      function animateTarget(destination) {
+        if (animationFrames.target) window.cancelAnimationFrame(animationFrames.target);
+        const startValue = sphereState.target;
+        const startedAt = performance.now();
+        const frame = (now) => {
+          const progress = Math.min(1, (now - startedAt) / MOTION_DURATION);
+          const value = startValue + (destination - startValue) * eased(progress);
+          sphereState.target = value;
+          drawTarget(value);
+          if (progress < 1) {
+            animationFrames.target = window.requestAnimationFrame(frame);
+          } else {
+            sphereState.target = destination;
+            animationFrames.target = null;
+          }
+        };
+        animationFrames.target = window.requestAnimationFrame(frame);
+      }
+
+      function renderStep(result, preview = false) {
+        if (preview) {
+          sphereState = {
+            prefix: { ...state.prefix },
+            note: { ...result.readablePoint },
+            target: state.lambdaProduct
+          };
+          drawSphereVector('prefix', sphereState.prefix);
+          drawSphereVector('note', sphereState.note);
+          drawTarget(sphereState.target);
+        } else {
+          animateVector('prefix', result.nextPrefix);
+          animateVector('note', result.readablePoint);
+          animateTarget(result.nextProduct);
+        }
+        $('current').textContent = result.current < 1e-10 ? '0' : result.current.toExponential(2);
+        $('prefix').textContent = preview ? 'ready' : `U1 … U${result.index}`;
+        $('product').textContent = preview ? '1' : formatProduct(result.index, result.nextProduct);
+        $('detail').textContent = preview
+          ? 'Ready: the first Qubit Ostinato note lies on the zero set.'
+          : `Prefix ${result.index}: the quantum endpoint lies on the stochastic target latitude.`;
+      }
+
+      function renderHistory() {
+        const visible = state.history.slice(-8);
+        const container = $('trajectory');
+        container.replaceChildren();
+        visible.forEach((entry) => {
+          const step = document.createElement('div');
+          step.className = 'trajectory-step';
+          const label = document.createElement('span');
+          label.className = 'gate-label';
+          label.textContent = `U${entry.index}`;
+          const dot = document.createElement('span');
+          dot.className = `trajectory-dot ${entry.outcome === 0 ? 'e' : 'f'}`;
+          dot.textContent = entry.outcome === 0 ? 'E' : 'F';
+          step.append(label, dot);
+          container.append(step);
+        });
+        for (let index = visible.length; index < 8; index += 1) {
+          const step = document.createElement('div');
+          step.className = 'trajectory-step';
+          const label = document.createElement('span');
+          label.className = 'gate-label';
+          label.textContent = '…';
+          const dot = document.createElement('span');
+          dot.className = 'trajectory-dot placeholder';
+          dot.textContent = '·';
+          step.append(label, dot);
+          container.append(step);
+        }
+      }
+
+      function gaussianJitter(standardDeviation = 7) {
+        const u = Math.max(Number.EPSILON, Math.random());
+        const v = Math.random();
+        const normal = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+        return Math.max(-2.8, Math.min(2.8, normal)) * standardDeviation;
+      }
+
+      function addFlowStep(outcome) {
+        const namespace = 'http://www.w3.org/2000/svg';
+        if (!state.flowPath) {
+          state.flowPath = document.createElementNS(namespace, 'polyline');
+          state.flowPath.setAttribute('class', 'sample-line');
+          $('flow-lines').append(state.flowPath);
+        }
+        const stepInWindow = state.flowOutcomes.length;
+        const y = outcome === 0 ? 78 : 220;
+        state.flowOutcomes.push(outcome);
+        state.flowPoints.push(`${xPositions[stepInWindow]} ${(y + gaussianJitter()).toFixed(2)}`);
+        state.flowPath.setAttribute('points', state.flowPoints.join(' '));
+        state.flowPath.classList.remove('latest-e', 'latest-f');
+        state.flowPath.classList.add(outcome === 0 ? 'latest-e' : 'latest-f');
+        const activePath = state.flowPath;
+        window.setTimeout(() => activePath.classList.remove('latest-e', 'latest-f'), 230);
+
+        if (state.flowOutcomes.length === 8) {
+          flowCount += 1;
+          $('flow-count').textContent = `${flowCount} eight-note path${flowCount === 1 ? '' : 's'} sampled; Qubit Ostinato continues.`;
+          state.flowOutcomes = [];
+          state.flowPoints = [];
+          state.flowPath = null;
+        } else {
+          $('flow-count').textContent = `Drawing path ${flowCount + 1}: ${state.flowOutcomes.length}/8 notes.`;
+        }
+      }
+
+      async function ensureAudio() {
+        const Context = window.AudioContext || window.webkitAudioContext;
+        if (!Context) return false;
+        if (!audioContext || audioContext.state === 'closed') audioContext = new Context();
+        if (audioContext.state !== 'running') await audioContext.resume();
+        return audioContext.state === 'running';
+      }
+
+      function playTone(outcome) {
+        if (!audioContext || audioContext.state !== 'running') return;
+        const oscillator = audioContext.createOscillator();
+        const harmonic = audioContext.createOscillator();
+        const harmonicGain = audioContext.createGain();
+        const gain = audioContext.createGain();
+        const start = audioContext.currentTime + 0.01;
+        const frequency = outcome === 0 ? 82.407 : 87.307;
+        oscillator.type = 'sawtooth';
+        harmonic.type = 'triangle';
+        oscillator.frequency.value = frequency;
+        harmonic.frequency.value = frequency * 2;
+        harmonicGain.gain.value = 0.15;
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(0.11, start + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.24);
+        oscillator.connect(gain).connect(audioContext.destination);
+        harmonic.connect(harmonicGain).connect(gain);
+        oscillator.start(start);
+        harmonic.start(start);
+        oscillator.stop(start + 0.26);
+        harmonic.stop(start + 0.26);
+      }
+
+      function sampleOutcome() {
+        const p0 = state.outcome === 0 ? (1 + LAMBDA) / 2 : (1 - LAMBDA) / 2;
+        return Math.random() < p0 ? 0 : 1;
+      }
+
+      function advance() {
+        if (!playing) return;
+        const result = computeStep(state);
+        const outcome = sampleOutcome();
+        state.step = result.index;
+        state.prefix = result.nextPrefix;
+        state.lambdaProduct = result.nextProduct;
+        state.outcome = outcome;
+        state.history.push({ index: result.index, outcome });
+        addFlowStep(outcome);
+        renderStep(result);
+        renderHistory();
+        playTone(outcome);
+        $('status').textContent = `Playing prefix ${result.index}; each new unitary note remains on the zero set.`;
+        timers.push(window.setTimeout(advance, TEMPO));
+      }
+
+      function reset() {
+        while (timers.length) window.clearTimeout(timers.pop());
+        Object.keys(animationFrames).forEach((key) => {
+          if (animationFrames[key]) window.cancelAnimationFrame(animationFrames[key]);
+          animationFrames[key] = null;
+        });
+        playing = false;
+        flowCount = 0;
+        state = {
+          step: 0,
+          prefix: { x: 0, y: 0, z: 1 },
+          lambdaProduct: 1,
+          outcome: 0,
+          history: [],
+          flowOutcomes: [],
+          flowPoints: [],
+          flowPath: null
+        };
+        $('flow-lines').replaceChildren();
+        $('flow-count').textContent = 'No eight-note paths yet.';
+        renderHistory();
+        renderStep(computeStep(state), true);
+      }
+
+      async function toggle() {
+        if (playing) {
+          playing = false;
+          while (timers.length) window.clearTimeout(timers.pop());
+          $('play').textContent = '▶ Continue playing';
+          $('play').setAttribute('aria-pressed', 'false');
+          $('status').textContent = `Stopped after prefix ${state.step}.`;
+          return;
+        }
+        if (!await ensureAudio()) return;
+        playing = true;
+        $('play').textContent = '■ Stop';
+        $('play').setAttribute('aria-pressed', 'true');
+        advance();
+      }
+
+      $('play').addEventListener('click', toggle);
+      reset();
+    })();
+  </script>
+</body>
+</html>

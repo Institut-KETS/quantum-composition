@@ -1,0 +1,22 @@
+{
+  "name": "quantum-composition-interval-study",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc --noEmit && node --experimental-strip-types scripts/verify-publication-capture.mjs",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "6.0.2",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "typescript": "5.9.3",
+    "vite": "8.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7"
+  }
+}
