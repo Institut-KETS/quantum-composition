@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/">
     <title>The Quantum Composition Project</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/site.css?v=3">
+    <link rel="stylesheet" href="assets/site.css?v=4">
   </head>
   <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -54,33 +54,107 @@
           <p><strong>The musical consequence.</strong> A score may play predictably from the beginning yet become unpredictable when the conductor enters midway through a passage.</p>
         </div>
         <section class="composition-guide" aria-labelledby="composition-heading">
-          <h3 id="composition-heading">The composition conditions</h3>
-          <p>For a unitary operation <i>U</i>, its Born kernel 𝓑(<i>U</i>) is the matrix of transition probabilities in a fixed measurement basis:</p>
-          <p class="display-math">𝓑(<i>U</i>)<sub><i>yx</i></sub> = |⟨<i>y</i>|<i>U</i>|<i>x</i>⟩|².</p>
-          <dl class="condition-list">
-            <div>
-              <dt>Two-step composition</dt>
-              <dd>
-                <p class="display-math">𝓑(<i>VU</i>) = 𝓑(<i>V</i>)𝓑(<i>U</i>).</p>
-                <p>The left side preserves coherence through both operations and measures only at the end. The right side checks between <i>U</i> and <i>V</i>, then composes ordinary transition probabilities. Equality means that the intermediate check does not change the endpoint distribution. Equivalently, the composition defect and the associated schedule information both vanish.</p>
-              </dd>
+          <h3 id="composition-heading">How composition is tested</h3>
+          <p>For a unitary operation <i>U</i>, the Born kernel <span class="born-q">Q</span>(<i>U</i>) records its transition probabilities in a fixed measurement basis:</p>
+          <p class="display-math"><span class="born-q">Q</span>(<i>U</i>)<sub><i>yx</i></sub> = |⟨<i>y</i>|<i>U</i>|<i>x</i>⟩|².</p>
+
+          <figure class="commuting-figure">
+            <div class="diagram-scroll">
+              <svg class="commuting-diagram" viewBox="0 0 760 315" role="img" aria-labelledby="diagram-title diagram-desc">
+                <title id="diagram-title">The quantum–stochastic composition diagram</title>
+                <desc id="diagram-desc">Starting with U and V, the left route composes the unitaries and then applies the Born map. The right route applies the Born map to each unitary and then composes the resulting stochastic kernels. The diagram commutes when the two bottom results agree.</desc>
+                <defs>
+                  <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                  </marker>
+                </defs>
+                <text class="diagram-math" x="380" y="30" text-anchor="middle">(<tspan font-style="italic">U</tspan>, <tspan font-style="italic">V</tspan>)</text>
+                <text class="diagram-heading" x="165" y="72" text-anchor="middle">Quantum composition</text>
+                <text class="diagram-heading" x="595" y="72" text-anchor="middle">Stochastic composition</text>
+                <path class="diagram-arrow" d="M355 42 L188 108"></path>
+                <path class="diagram-arrow" d="M405 42 L572 108"></path>
+                <text class="diagram-label" x="300" y="70" text-anchor="middle">compose</text>
+                <text class="diagram-label" x="460" y="70" text-anchor="middle">evaluate</text>
+                <text class="diagram-math" x="165" y="132" text-anchor="middle"><tspan font-style="italic">VU</tspan></text>
+                <text class="diagram-math" x="595" y="132" text-anchor="middle">(<tspan class="born-q">Q</tspan>(<tspan font-style="italic">V</tspan>), <tspan class="born-q">Q</tspan>(<tspan font-style="italic">U</tspan>))</text>
+                <path class="diagram-arrow" d="M165 148 L165 224"></path>
+                <path class="diagram-arrow" d="M595 148 L595 224"></path>
+                <text class="diagram-label" x="130" y="190" text-anchor="middle">evaluate</text>
+                <text class="diagram-label" x="632" y="190" text-anchor="middle">compose</text>
+                <text class="diagram-math" x="165" y="258" text-anchor="middle"><tspan class="born-q">Q</tspan>(<tspan font-style="italic">VU</tspan>)</text>
+                <text class="diagram-math" x="595" y="258" text-anchor="middle"><tspan class="born-q">Q</tspan>(<tspan font-style="italic">V</tspan>)<tspan class="born-q">Q</tspan>(<tspan font-style="italic">U</tspan>)</text>
+                <line class="diagram-equals" x1="305" y1="244" x2="455" y2="244"></line>
+                <line class="diagram-equals" x1="305" y1="254" x2="455" y2="254"></line>
+                <text class="diagram-label" x="380" y="292" text-anchor="middle">equal exactly when the diagram commutes</text>
+              </svg>
             </div>
-            <div>
-              <dt>Prefix consistency</dt>
-              <dd>
-                <p class="display-math">𝓑(<i>U</i><sub><i>k</i></sub>⋯<i>U</i><sub>1</sub>) = 𝓑(<i>U</i><sub><i>k</i></sub>)⋯𝓑(<i>U</i><sub>1</sub>)</p>
-                <p>This equality must hold for every prefix of the sequence, always beginning at its original starting boundary.</p>
-              </dd>
+            <figcaption>Compose first and then take probabilities, or take probabilities first and then compose. Quantum interference is precisely what can make the two routes disagree.</figcaption>
+          </figure>
+
+          <section class="current-definition" aria-labelledby="current-heading">
+            <h4 id="current-heading">The Born–Chapman–Kolmogorov current</h4>
+            <p class="display-math">𝒥(<i>V</i>,<i>U</i>) := <span class="born-q">Q</span>(<i>VU</i>) − <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>).</p>
+            <p>The current is the signed difference between the coherent endpoint law and the stepwise-checked law. A positive entry is probability added to a transition by interference; a negative entry is probability removed. Every column sums to zero: the current moves probability but does not create it.</p>
+            <p>Let <i>S</i> record whether an intermediate check was made, <i>X</i> the prepared input, and <i>Y</i> the endpoint. Then the same consistency test can be read three ways:</p>
+            <p class="equivalence-line">diagram commutes&nbsp; ⇔ &nbsp;𝒥(<i>V</i>,<i>U</i>) = 0&nbsp; ⇔ &nbsp;𝓘(<i>S</i>;<i>Y</i> | <i>X</i>) = 0.</p>
+          </section>
+
+          <section class="cue-explainer" aria-labelledby="cue-heading">
+            <h4 id="cue-heading">The difference is where the sequence may begin</h4>
+            <div class="cue-comparison">
+              <article>
+                <p class="cue-name">Prefix consistency</p>
+                <h5>One preparation cue</h5>
+                <div class="passage-line" aria-label="Prepare at boundary zero, then apply U1, U2, and U3">
+                  <span class="cue-cell">prepare at 0</span>
+                  <span>U₁</span><span>U₂</span><span>U₃</span>
+                </div>
+                <p class="intervals">Test the growing passages <strong>0→1</strong>, <strong>0→2</strong>, and <strong>0→3</strong>. Every test is anchored to the original start.</p>
+              </article>
+              <article>
+                <p class="cue-name">Boundary stability</p>
+                <h5>Move the preparation cue</h5>
+                <div class="passage-stack" aria-label="Freshly prepare at boundaries zero, one, and two">
+                  <div class="passage-line"><span class="cue-cell">prepare at 0</span><span>U₁</span><span>U₂</span><span>U₃</span></div>
+                  <div class="passage-line"><span class="cue-cell">prepare at 1</span><span class="blank-step">·</span><span>U₂</span><span>U₃</span></div>
+                  <div class="passage-line"><span class="cue-cell">prepare at 2</span><span class="blank-step">·</span><span class="blank-step">·</span><span>U₃</span></div>
+                </div>
+                <p class="intervals">From each fresh cue, test every endpoint to its right. This includes passages such as <strong>1→3</strong> that prefix consistency never tests.</p>
+              </article>
             </div>
-            <div>
-              <dt>Boundary stability</dt>
-              <dd>
-                <p class="display-math">𝓑(<i>U</i><sub><i>b</i></sub>⋯<i>U</i><sub><i>a</i></sub>) = 𝓑(<i>U</i><sub><i>b</i></sub>)⋯𝓑(<i>U</i><sub><i>a</i></sub>)</p>
-                <p>This stronger condition must hold on every contiguous interval. Each interval is freshly prepared at its own boundary, including boundaries inside the original sequence.</p>
-              </dd>
+            <p class="composition-conclusion"><strong>The paradox.</strong> A sequence can pass every test from cue 0 and fail when exactly the same later operations are freshly prepared from cue 1. Boundary stability implies prefix consistency; prefix consistency does not imply boundary stability.</p>
+          </section>
+
+          <section class="rhythm-example" id="qubit-rhythm" aria-labelledby="rhythm-heading">
+            <h4 id="rhythm-heading">The qubit rhythm: three beats, four possible cuts</h4>
+            <p>For the first three notes of Qubit Ostinato, a tuple lists successive hold lengths. Every row lasts three beats; only the positions of the readouts change.</p>
+            <div class="rhythm-table" role="img" aria-label="The schedules 3, 2-1, and 1-1-1 preserve the endpoint pitch law. The schedule 1-2 fails after an internal cue.">
+              <div class="rhythm-head"><span>Schedule</span><span>Three-beat realization</span><span>Endpoint law</span></div>
+              <div class="rhythm-row">
+                <strong>(3)</strong>
+                <div class="rhythm-bar"><span class="hold-3">hold 3Δ</span></div>
+                <span>faithful</span>
+              </div>
+              <div class="rhythm-row">
+                <strong>(2,1)</strong>
+                <div class="rhythm-bar"><span class="hold-2">hold 2Δ</span><span class="hold-1">Δ</span></div>
+                <span>faithful</span>
+              </div>
+              <div class="rhythm-row">
+                <strong>(1,1,1)</strong>
+                <div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-1">Δ</span><span class="hold-1">Δ</span></div>
+                <span>faithful</span>
+              </div>
+              <div class="rhythm-row rhythm-fails">
+                <strong>(1,2)</strong>
+                <div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-2">hold 2Δ</span></div>
+                <span>fails at cue 1</span>
+              </div>
             </div>
-          </dl>
-          <p class="composition-conclusion"><strong>The distinction.</strong> Boundary stability implies prefix consistency, but the converse can fail. A sequence can therefore compose perfectly from the beginning and cease to compose when restarted from an internal boundary. This boundary-sensitive failure is the quantum composition paradox.</p>
+            <p class="display-math">𝓡(<i>U</i><sub>1</sub>,<i>U</i><sub>2</sub>,<i>U</i><sub>3</sub>) = {(3), (2,1), (1,1,1)}.</p>
+            <p>The excluded rhythm (1,2) places a readout after the first beat and then asks the unchanged two-note suffix to compose from that internal cue—the one test the prefix law did not include.</p>
+            <p><a href="qubit-ostinato.html">Play the continuing E₂–F₂ Qubit Ostinato →</a></p>
+          </section>
         </section>
       </section>
 
