@@ -114,58 +114,67 @@
 
           <section class="cue-explainer" aria-labelledby="cue-heading">
             <h4 id="cue-heading">The difference is where the sequence may begin</h4>
+            <p>For the first three notes of Qubit Ostinato, the six contiguous passages and their Born-composition tests are:</p>
             <div class="cue-comparison">
               <article>
                 <p class="cue-name">Prefix consistency</p>
-                <h5>One preparation cue</h5>
+                <h5>Begin at cue 0</h5>
                 <div class="passage-line" aria-label="Prepare at boundary zero, then apply U1, U2, and U3">
                   <span class="cue-cell">prepare at 0</span>
                   <span>U₁</span><span>U₂</span><span>U₃</span>
                 </div>
-                <p class="intervals">Test the growing passages <strong>0→1</strong>, <strong>0→2</strong>, and <strong>0→3</strong>. Every test is anchored to the original start.</p>
+                <div class="interval-register" role="table" aria-label="Passages beginning at cue zero">
+                  <div class="interval-head" role="row"><span role="columnheader">Passage</span><span role="columnheader">Born composition</span><span role="columnheader">Test</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">0→1</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₁)</span><span role="cell">automatic</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">0→2</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₂∘<i>U</i>₁) = <span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span><span role="cell">holds</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">0→3</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁) = <span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span><span role="cell">holds</span></div>
+                </div>
               </article>
               <article>
                 <p class="cue-name">Boundary stability</p>
-                <h5>Move the preparation cue</h5>
-                <div class="passage-stack" aria-label="Freshly prepare at boundaries zero, one, and two">
-                  <div class="passage-line"><span class="cue-cell">prepare at 0</span><span>U₁</span><span>U₂</span><span>U₃</span></div>
+                <h5>Restart at an internal cue</h5>
+                <div class="passage-stack" aria-label="Freshly prepare at boundaries one and two">
                   <div class="passage-line"><span class="cue-cell">prepare at 1</span><span class="blank-step">·</span><span>U₂</span><span>U₃</span></div>
                   <div class="passage-line"><span class="cue-cell">prepare at 2</span><span class="blank-step">·</span><span class="blank-step">·</span><span>U₃</span></div>
                 </div>
-                <p class="intervals">From each fresh cue, test every endpoint to its right. This includes passages such as <strong>1→3</strong> that prefix consistency never tests.</p>
+                <div class="interval-register" role="table" aria-label="Passages beginning at internal cues">
+                  <div class="interval-head" role="row"><span role="columnheader">Passage</span><span role="columnheader">Born composition</span><span role="columnheader">Test</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">1→2</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₂)</span><span role="cell">automatic</span></div>
+                  <div class="interval-row interval-fails" role="row"><strong role="cell">1→3</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂) ≠ <span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)</span><span role="cell">fails</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">2→3</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₃)</span><span role="cell">automatic</span></div>
+                </div>
               </article>
             </div>
-            <p class="composition-conclusion"><strong>The paradox.</strong> A sequence can pass every test from cue 0 and fail when exactly the same later operations are freshly prepared from cue 1. Boundary stability implies prefix consistency; prefix consistency does not imply boundary stability.</p>
+            <p class="composition-conclusion">Here <span class="born-q">Q</span>(<i>U</i>₁) = <span class="born-q">Q</span>(<i>U</i>₂) = <span class="born-q">Q</span>(<i>U</i>₃) = <i>K</i>(1/2), the one-note law with probability 3/4 of retaining an outcome and 1/4 of changing it. <strong>The paradox.</strong> The score passes every fully stepwise test from cue 0, but the unchanged suffix <i>U</i>₃∘<i>U</i>₂ fails when freshly begun at cue 1.</p>
           </section>
 
           <section class="rhythm-example" id="qubit-rhythm" aria-labelledby="rhythm-heading">
-            <h4 id="rhythm-heading">The qubit rhythm: three beats, four possible cuts</h4>
-            <p>For the first three notes of Qubit Ostinato, a tuple lists successive hold lengths. Every row lasts three beats; only the positions of the readouts change.</p>
-            <div class="rhythm-table" role="img" aria-label="The schedules 3, 2-1, and 1-1-1 preserve the endpoint pitch law. The schedule 1-2 fails after an internal cue.">
-              <div class="rhythm-head"><span>Schedule</span><span>Three-beat realization</span><span>Endpoint law</span></div>
-              <div class="rhythm-row">
-                <strong>(3)</strong>
-                <div class="rhythm-bar"><span class="hold-3">hold 3Δ</span></div>
-                <span>faithful</span>
+            <h4 id="rhythm-heading">The qubit rhythm: four readout schedules for the same passage</h4>
+            <p>Every row acts on the same ordered passage <i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁. Tuples give block lengths in chronological order from the entrance cue; the Born factors print in reverse order because the first operation acts on the right.</p>
+            <div class="rhythm-table" role="table" aria-label="Readout schedules for the first three notes of Qubit Ostinato">
+              <div class="rhythm-head" role="row"><span role="columnheader">Schedule</span><span role="columnheader">Readout blocks and Born factors</span><span role="columnheader">Matches endpoint?</span></div>
+              <div class="rhythm-row" role="row">
+                <strong role="rowheader">(3)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-3">hold 3Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁)</span></div>
+                <span role="cell">faithful</span>
               </div>
-              <div class="rhythm-row">
-                <strong>(2,1)</strong>
-                <div class="rhythm-bar"><span class="hold-2">hold 2Δ</span><span class="hold-1">Δ</span></div>
-                <span>faithful</span>
+              <div class="rhythm-row" role="row">
+                <strong role="rowheader">(2,1)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-2">hold 2Δ</span><span class="hold-1">Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂∘<i>U</i>₁)</span></div>
+                <span role="cell">faithful</span>
               </div>
-              <div class="rhythm-row">
-                <strong>(1,1,1)</strong>
-                <div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-1">Δ</span><span class="hold-1">Δ</span></div>
-                <span>faithful</span>
+              <div class="rhythm-row" role="row">
+                <strong role="rowheader">(1,1,1)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-1">Δ</span><span class="hold-1">Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span></div>
+                <span role="cell">faithful</span>
               </div>
-              <div class="rhythm-row rhythm-fails">
-                <strong>(1,2)</strong>
-                <div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-2">hold 2Δ</span></div>
-                <span>fails at cue 1</span>
+              <div class="rhythm-row rhythm-fails" role="row">
+                <strong role="rowheader">(1,2)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-2">hold 2Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span></div>
+                <span role="cell">fails</span>
               </div>
             </div>
-            <p class="display-math">𝓡(<i>U</i><sub>1</sub>,<i>U</i><sub>2</sub>,<i>U</i><sub>3</sub>) = {(3), (2,1), (1,1,1)}.</p>
-            <p>The excluded rhythm (1,2) places a readout after the first beat and then asks the unchanged two-note suffix to compose from that internal cue—the one test the prefix law did not include.</p>
+            <p>The last line is the paper's second orphaned composition: the full passage fails when cut after <i>U</i>₁. In this example the suffix failure persists after composition with <span class="born-q">Q</span>(<i>U</i>₁), which is invertible.</p>
             <p><a href="qubit-ostinato.html">Play the continuing E₂–F₂ Qubit Ostinato →</a></p>
           </section>
         </section>
