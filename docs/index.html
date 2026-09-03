@@ -50,14 +50,38 @@
         <div class="prose">
           <p><strong>The problem.</strong> Intermediate measurements erase interference, so probabilities inferred step by step can differ from the final outcome distribution.</p>
           <p><strong>The question.</strong> When can a sequence of quantum operations be measured at every intermediate step without disturbing the final outcome distribution? How badly can this fail?</p>
-          <p><strong>The result.</strong> Stepwise and endpoint statistics agree on every contiguous interval if and only if every operation is a phase-dressed permutation—the quantum counterpart of a deterministic reversible process. We quantify the failure, prove sharp bounds, and show that predicting it is computationally as hard as simulating quantum computation itself.</p>
+          <p><strong>The result.</strong> Universal composition for a composition-closed family occurs exactly when every operation is a phase-dressed permutation—the quantum counterpart of a deterministic reversible process. Prescribed sequences can be richer: they may compose from their initial boundary yet fail after an internal restart. We quantify the failure, prove sharp bounds, and show that predicting it is computationally as hard as simulating quantum computation itself.</p>
           <p><strong>The musical consequence.</strong> A score may play predictably from the beginning yet become unpredictable when the conductor enters midway through a passage.</p>
         </div>
-        <div class="equation" aria-label="Composition law">
-          <span>Classical composition asks for</span>
-          <strong>𝓑(VU) = 𝓑(V)𝓑(U).</strong>
-          <span>Quantum interference can break this equality.</span>
-        </div>
+        <section class="composition-guide" aria-labelledby="composition-heading">
+          <h3 id="composition-heading">The composition conditions</h3>
+          <p>For a unitary operation <i>U</i>, its Born kernel 𝓑(<i>U</i>) is the matrix of transition probabilities in a fixed measurement basis:</p>
+          <p class="display-math">𝓑(<i>U</i>)<sub><i>yx</i></sub> = |⟨<i>y</i>|<i>U</i>|<i>x</i>⟩|².</p>
+          <dl class="condition-list">
+            <div>
+              <dt>Two-step composition</dt>
+              <dd>
+                <p class="display-math">𝓑(<i>VU</i>) = 𝓑(<i>V</i>)𝓑(<i>U</i>).</p>
+                <p>The left side preserves coherence through both operations and measures only at the end. The right side checks between <i>U</i> and <i>V</i>, then composes ordinary transition probabilities. Equality means that the intermediate check does not change the endpoint distribution. Equivalently, the composition defect and the associated schedule information both vanish.</p>
+              </dd>
+            </div>
+            <div>
+              <dt>Prefix consistency</dt>
+              <dd>
+                <p class="display-math">𝓑(<i>U</i><sub><i>k</i></sub>⋯<i>U</i><sub>1</sub>) = 𝓑(<i>U</i><sub><i>k</i></sub>)⋯𝓑(<i>U</i><sub>1</sub>)</p>
+                <p>This equality must hold for every prefix of the sequence, always beginning at its original starting boundary.</p>
+              </dd>
+            </div>
+            <div>
+              <dt>Boundary stability</dt>
+              <dd>
+                <p class="display-math">𝓑(<i>U</i><sub><i>b</i></sub>⋯<i>U</i><sub><i>a</i></sub>) = 𝓑(<i>U</i><sub><i>b</i></sub>)⋯𝓑(<i>U</i><sub><i>a</i></sub>)</p>
+                <p>This stronger condition must hold on every contiguous interval. Each interval is freshly prepared at its own boundary, including boundaries inside the original sequence.</p>
+              </dd>
+            </div>
+          </dl>
+          <p class="composition-conclusion"><strong>The distinction.</strong> Boundary stability implies prefix consistency, but the converse can fail. A sequence can therefore compose perfectly from the beginning and cease to compose when restarted from an internal boundary. This boundary-sensitive failure is the quantum composition paradox.</p>
+        </section>
       </section>
 
       <section class="content-section" id="music" aria-labelledby="music-heading">
