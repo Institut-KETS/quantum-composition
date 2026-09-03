@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/">
     <title>The Quantum Composition Project</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/site.css?v=4">
+    <link rel="stylesheet" href="assets/site.css?v=5">
   </head>
   <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -23,6 +23,8 @@
         <a class="home-link" href="#top">Quantum Composition</a>
         <span aria-hidden="true">|</span>
         <a href="#paradox">The paradox</a>
+        <span aria-hidden="true">|</span>
+        <a href="#theorems">Theorems</a>
         <span aria-hidden="true">|</span>
         <a href="#music">Music</a>
         <span aria-hidden="true">|</span>
@@ -39,8 +41,8 @@
       <section class="masthead" aria-labelledby="project-title">
         <p class="section-label">Composition laws in quantum theory</p>
         <h1 id="project-title">The Quantum Composition Paradox</h1>
-        <p class="subtitle">Quantum theory predicts music that cannot compose. We classify when it does.</p>
-        <p class="byline">Jacob Biamonte · ÉTS, Université du Québec</p>
+        <p class="subtitle">Quantum theory predicts music that cannot compose. We classify when it does by treating measurement as a test of compositional consistency across temporal boundaries.</p>
+        <p class="byline"><a rel="author" href="https://profs.etsmtl.ca/jbiamonte/index.html">Jacob Biamonte</a> · ÉTS, Université du Québec</p>
         <p class="introduction">Quantum transition probabilities—the likelihood of one outcome following another—do not multiply the way classical probabilities do. Checking a quantum process step by step can change its predicted endpoint statistics.</p>
         <p class="project-links"><a href="#music">Musical demonstrations</a> · <a href="https://github.com/Institut-KETS/quantum-composition">GitHub project page</a> · <span>arXiv link forthcoming</span></p>
       </section>
@@ -156,6 +158,56 @@
             <p><a href="qubit-ostinato.html">Play the continuing E₂–F₂ Qubit Ostinato →</a></p>
           </section>
         </section>
+      </section>
+
+      <section class="content-section theorem-section" id="theorems" aria-labelledby="theorems-heading">
+        <p class="section-label">The mathematical claim</p>
+        <h2 id="theorems-heading">Music makes the paradox audible.</h2>
+        <p class="theorem-introduction">This paper gives quantum music a mathematical theory of composition: an exact law, a boundary paradox, a sharp capacity limit, and a quantum-complete prediction problem. The score is not an analogy laid over the physics. It is where the composition law becomes audible.</p>
+
+        <div class="theorem-list">
+          <article class="theorem-result">
+            <p class="theorem-number">Theorem 2.1</p>
+            <div>
+              <h3>Universal composition is deterministic.</h3>
+              <p>For a finite-dimensional composition-closed family, <span class="born-q">Q</span>(<i>VU</i>) = <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>) for every allowed pair if and only if every operation is a phase-dressed permutation. At the probability level, the only universally compositional quantum processes are reversible deterministic state machines.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Theorem 4.2</p>
+            <div>
+              <h3>A score can compose from the downbeat and fail from an internal cue.</h3>
+              <p>Genuinely mixing qubit sequences exist at arbitrary finite length—and as an explicit infinite sequence—that agree with stepwise statistics at every prefix from the opening boundary, yet fail when the unchanged continuation is restarted from an internal boundary.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Theorem 4.3</p>
+            <div>
+              <h3>Cue stability has a sharp capacity.</h3>
+              <p>In dimension <i>d</i>, a boundary-stable sequence contains at most <i>d</i> full-support steps. The bound is attained in every prime dimension: a cue-stable <i>d</i>-outcome score can contain exactly <i>d</i> fully mixing notes.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Theorem 5.2</p>
+            <div>
+              <h3>Musical prediction is quantum-complete.</h3>
+              <p>In the circuit-universal score model, deciding a promised binary musical transition is PromiseBQP-complete under classical polynomial-time reductions. An efficient classical randomized predictor for every promised transition would imply BPP ⊇ BQP. This is not a hardness claim for testing cue stability.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Theorem H.2</p>
+            <div>
+              <h3>The disturbance bound is universal and sharp.</h3>
+              <p>The normalized Born-composition defect satisfies 0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) ≤ 1 in every finite dimension. Inverse complex-Hadamard pairs attain the maximum.</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="theorem-coda">Taken together, the results establish a theorem-driven theory of quantum composition: its exact classical limit, its irreducibly quantum failure, its finite-dimensional capacity, and its computational frontier.</p>
       </section>
 
       <section class="content-section" id="music" aria-labelledby="music-heading">
