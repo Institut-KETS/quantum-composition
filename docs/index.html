@@ -24,7 +24,7 @@
     <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/">
     <title>The Quantum Composition Project</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/site.css?v=5">
+    <link rel="stylesheet" href="assets/site.css?v=6">
   </head>
   <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -54,7 +54,7 @@
         <h1 id="project-title">The Quantum Composition Paradox</h1>
         <p class="subtitle">Quantum theory predicts music that cannot compose. We classify when it does by treating measurement as a test of compositional consistency across temporal boundaries.</p>
         <p class="byline"><a rel="author" href="https://profs.etsmtl.ca/jbiamonte/index.html">Jacob Biamonte</a> · ÉTS, Université du Québec</p>
-        <p class="introduction">Quantum transition probabilities—the likelihood of one outcome following another—do not multiply the way classical probabilities do. Checking a quantum process step by step can change its predicted endpoint statistics.</p>
+        <p class="introduction">Quantum transition probabilities—the likelihood of one outcome following another—do not multiply the way classical probabilities do. Checking a quantum process step by step can change its predicted endpoint statistics. We classify exactly when stepwise and endpoint statistics agree, introducing the Born–Chapman–Kolmogorov current to measure their disagreement.</p>
         <p class="project-links"><a href="#music">Musical demonstrations</a> · <a href="https://github.com/Institut-KETS/quantum-composition">GitHub project page</a> · <span>arXiv link forthcoming</span></p>
       </section>
 
@@ -105,11 +105,14 @@
           </figure>
 
           <section class="current-definition" aria-labelledby="current-heading">
-            <h4 id="current-heading">The Born–Chapman–Kolmogorov current</h4>
-            <p class="display-math">𝒥(<i>V</i>,<i>U</i>) := <span class="born-q">Q</span>(<i>VU</i>) − <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>).</p>
+            <h4 id="current-heading">Introducing the Born–Chapman–Kolmogorov current</h4>
+            <p class="display-math">𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>) := <span class="born-q">Q</span>(<i>VU</i>) − <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>).</p>
             <p>The current is the signed difference between the coherent endpoint law and the stepwise-checked law. A positive entry is probability added to a transition by interference; a negative entry is probability removed. Every column sums to zero: the current moves probability but does not create it.</p>
-            <p>Let <i>S</i> record whether an intermediate check was made, <i>X</i> the prepared input, and <i>Y</i> the endpoint. Then the same consistency test can be read three ways:</p>
-            <p class="equivalence-line">diagram commutes&nbsp; ⇔ &nbsp;𝒥(<i>V</i>,<i>U</i>) = 0&nbsp; ⇔ &nbsp;𝓘(<i>S</i>;<i>Y</i> | <i>X</i>) = 0.</p>
+            <p>Its normalized Frobenius size is</p>
+            <p class="display-math">0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) := <span class="math-ratio">1/√(<i>d</i>−1)</span> ‖𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>)‖<sub>F</sub> ≤ 1.</p>
+            <p>Here 𝒞 labels the fixed measurement basis and <i>d</i> is its number of outcomes. The value 0 means exact composition; 1 is the largest possible failure, and the bound is attained.</p>
+            <p>Let <i>S</i> record whether an intermediate check was made, <i>X</i> the prepared input, and <i>Y</i> the endpoint. Then the same consistency test can be read four ways:</p>
+            <p class="equivalence-line">diagram commutes&nbsp; ⇔ &nbsp;𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>) = 0&nbsp; ⇔ &nbsp;ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) = 0&nbsp; ⇔ &nbsp;𝓘(<i>S</i>;<i>Y</i> | <i>X</i>) = 0.</p>
           </section>
 
           <section class="cue-explainer" aria-labelledby="cue-heading">
