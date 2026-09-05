@@ -12,10 +12,10 @@ export const DEFAULTS: Parameters = { xi: 1 / 6, eta: 1 / 6, zeta: 0 };
 export const BASIS = ['00', '01', '10', '11'];
 export const SOUND = ['C', 'E', 'G', 'rest'];
 export const PASSAGES: Record<Passage, { title: string; first: string; second: string; description: string }> = {
-  'full-first': { title: 'Full score · cut after U₁', first: 'U₁', second: 'U₂ → U₃', description: 'All three Figure 5 gates. U₂ then U₃ share the second interval, with no check between them.' },
+  'full-first': { title: 'Full score · cut after U₁', first: 'U₁', second: 'U₂ → U₃', description: 'All three sound gates. U₂ then U₃ share the second interval, with no check between them.' },
   'full-second': { title: 'Full score · cut after U₂', first: 'U₁ → U₂', second: 'U₃', description: 'The same full circuit with another cut. U₁ then U₂ share the first interval, with no check between them.' },
   opening: { title: 'Opening pair · U₁ then U₂', first: 'U₁', second: 'U₂', description: 'The first two gates, independently prepared at the initial boundary.' },
-  internal: { title: 'Internal cue · U₂ then U₃', first: 'U₂', second: 'U₃', description: 'The last two gates, freshly prepared at their internal cue. This Figure 5 family still composes here.' },
+  internal: { title: 'Internal cue · U₂ then U₃', first: 'U₂', second: 'U₃', description: 'The last two gates, freshly prepared at their internal cue. This gate family still composes here.' },
 };
 export const add = (a: Complex, b: Complex): Complex => [a[0] + b[0], a[1] + b[1]];
 export const mul = (a: Complex, b: Complex): Complex => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];

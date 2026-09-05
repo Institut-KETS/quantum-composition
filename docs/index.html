@@ -24,7 +24,7 @@
     <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/">
     <title>The Quantum Composition Project</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/site.css?v=6">
+    <link rel="stylesheet" href="assets/site.css?v=8">
   </head>
   <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -55,6 +55,7 @@
         <p class="subtitle">Quantum theory predicts music that cannot compose. We classify when it does by treating measurement as a test of compositional consistency across temporal boundaries.</p>
         <p class="byline"><a rel="author" href="https://profs.etsmtl.ca/jbiamonte/index.html">Jacob Biamonte</a> · ÉTS, Université du Québec</p>
         <p class="introduction">Quantum transition probabilities—the likelihood of one outcome following another—do not multiply the way classical probabilities do. Checking a quantum process step by step can change its predicted endpoint statistics. We classify exactly when stepwise and endpoint statistics agree, introducing the Born–Chapman–Kolmogorov current to measure their disagreement.</p>
+        <div class="play-links masthead-actions"><a class="play-link" href="#qutrit-realization">Try the three rhythms <span aria-hidden="true">↓</span></a><a class="play-link play-link-secondary" href="qubit-ostinato.html">Play Qubit Ostinato <span aria-hidden="true">↗</span></a></div>
         <p class="project-links"><a href="#music">Musical demonstrations</a> · <a href="https://github.com/Institut-KETS/quantum-composition">GitHub project page</a> · <span>arXiv link forthcoming</span></p>
       </section>
 
@@ -63,8 +64,8 @@
         <div class="prose">
           <p><strong>The problem.</strong> Intermediate measurements erase interference, so probabilities inferred step by step can differ from the final outcome distribution.</p>
           <p><strong>The question.</strong> When can a sequence of quantum operations be measured at every intermediate step without disturbing the final outcome distribution? How badly can this fail?</p>
-          <p><strong>The result.</strong> Universal composition for a composition-closed family occurs exactly when every operation is a phase-dressed permutation—the quantum counterpart of a deterministic reversible process. Prescribed sequences can be richer: they may compose from their initial boundary yet fail after an internal restart. We quantify the failure, prove sharp bounds, and show that predicting it is computationally as hard as simulating quantum computation itself.</p>
-          <p><strong>The musical consequence.</strong> A score may play predictably from the beginning yet become unpredictable when the conductor enters midway through a passage.</p>
+          <p><strong>The result.</strong> Universal composition for a composition-closed family occurs exactly when every operation is a phase-dressed permutation—the quantum counterpart of a deterministic reversible process. Prescribed sequences can be richer: they may compose from their initial boundary yet fail when the unchanged remaining operations begin from a fresh preparation at an internal boundary. We quantify this failure and prove sharp bounds. Separately, promised output-probability prediction for general quantum circuits is PromiseBQP-complete.</p>
+          <p><strong>The musical consequence.</strong> Unitary operations are notes and temporal boundaries are cues. A classical output map assigns sounds to recorded outcomes. Readout timing gives the rhythm, and Born-kernel composition determines which rhythms preserve the endpoint distribution. The stepwise test can hold from the entrance cue and fail after fresh preparation at an internal cue.</p>
         </div>
         <section class="composition-guide" aria-labelledby="composition-heading">
           <h3 id="composition-heading">How composition is tested</h3>
@@ -108,7 +109,7 @@
             <h4 id="current-heading">Introducing the Born–Chapman–Kolmogorov current</h4>
             <p class="display-math">𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>) := <span class="born-q">Q</span>(<i>VU</i>) − <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>).</p>
             <p>The current is the signed difference between the coherent endpoint law and the stepwise-checked law. A positive entry is probability added to a transition by interference; a negative entry is probability removed. Every column sums to zero: the current moves probability but does not create it.</p>
-            <p>Its normalized Frobenius size is</p>
+            <p>Its normalized Frobenius norm is</p>
             <p class="display-math">0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) := <span class="math-ratio">1/√(<i>d</i>−1)</span> ‖𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>)‖<sub>F</sub> ≤ 1.</p>
             <p>Here 𝒞 labels the fixed measurement basis and <i>d</i> is its number of outcomes. The value 0 means exact composition; 1 is the largest possible failure, and the bound is attained.</p>
             <p>Let <i>S</i> record whether an intermediate check was made, <i>X</i> the prepared input, and <i>Y</i> the endpoint. Then the same consistency test can be read four ways:</p>
@@ -117,7 +118,7 @@
 
           <section class="cue-explainer" aria-labelledby="cue-heading">
             <h4 id="cue-heading">The difference is where the sequence may begin</h4>
-            <p>For the first three notes of Qubit Ostinato, the six contiguous passages and their Born-composition tests are:</p>
+            <p>For the paper’s first three qubit operations, with mixing parameter λ = 1/2, the six contiguous passages and their Born-composition tests are:</p>
             <div class="cue-comparison">
               <article>
                 <p class="cue-name">Prefix consistency</p>
@@ -152,33 +153,28 @@
           </section>
 
           <section class="rhythm-example" id="qubit-rhythm" aria-labelledby="rhythm-heading">
-            <h4 id="rhythm-heading">The qubit rhythm: four readout schedules for the same passage</h4>
-            <p>Every row acts on the same ordered passage <i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁. Tuples give block lengths in chronological order from the entrance cue; the Born factors print in reverse order because the first operation acts on the right.</p>
-            <div class="rhythm-table" role="table" aria-label="Readout schedules for the first three notes of Qubit Ostinato">
+            <h4 id="rhythm-heading">The qubit rhythm: three admissible readout schedules</h4>
+            <p>Each row applies <i>U</i>₁, then <i>U</i>₂, then <i>U</i>₃. A chosen beat duration Δ gives the time between adjacent operation boundaries. The block lengths specify successive sound holds; a dot marks every readout, including the final one. The initial sound is specified separately from the prepared quantum state.</p>
+            <div class="rhythm-table" role="table" aria-label="Admissible readout schedules for the paper’s three-step qubit passage">
               <div class="rhythm-head" role="row"><span role="columnheader">Schedule</span><span role="columnheader">Readout blocks and Born factors</span><span role="columnheader">Matches endpoint?</span></div>
               <div class="rhythm-row" role="row">
                 <strong role="rowheader">(3)</strong>
-                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-3">hold 3Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁)</span></div>
-                <span role="cell">faithful</span>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-3">U₁ → U₂ → U₃<br>3Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁)</span></div>
+                <span role="cell">admissible</span>
               </div>
               <div class="rhythm-row" role="row">
                 <strong role="rowheader">(2,1)</strong>
-                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-2">hold 2Δ</span><span class="hold-1">Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂∘<i>U</i>₁)</span></div>
-                <span role="cell">faithful</span>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-2">U₁ → U₂<br>2Δ</span><span class="hold-1">U₃<br>Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂∘<i>U</i>₁)</span></div>
+                <span role="cell">admissible</span>
               </div>
               <div class="rhythm-row" role="row">
                 <strong role="rowheader">(1,1,1)</strong>
-                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-1">Δ</span><span class="hold-1">Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span></div>
-                <span role="cell">faithful</span>
-              </div>
-              <div class="rhythm-row rhythm-fails" role="row">
-                <strong role="rowheader">(1,2)</strong>
-                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-1">Δ</span><span class="hold-2">hold 2Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span></div>
-                <span role="cell">fails</span>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-1">U₁<br>Δ</span><span class="hold-1">U₂<br>Δ</span><span class="hold-1">U₃<br>Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span></div>
+                <span role="cell">admissible</span>
               </div>
             </div>
-            <p>The last line is the paper's second orphaned composition: the full passage fails when cut after <i>U</i>₁. In this example the suffix failure persists after composition with <span class="born-q">Q</span>(<i>U</i>₁), which is invertible.</p>
-            <p><a href="qubit-ostinato.html">Play the continuing E₂–F₂ Qubit Ostinato →</a></p>
+            <p>Admissibility means preserving the coherent endpoint distribution for every context-basis input, and hence every classical mixture of those inputs. The physically possible schedule (1,2), with readouts after U₁ and then U₃, fails this condition. Removing the readout after U₂ from (1,1,1) gives (1,2); removing the remaining intermediate readout restores admissibility as (3).</p>
+            <p><a href="#qutrit-realization">Hear these three rhythms in the paper’s two-qubit realization →</a></p>
           </section>
         </section>
       </section>
@@ -200,8 +196,8 @@
           <article class="theorem-result">
             <p class="theorem-number">Theorem 4.2</p>
             <div>
-              <h3>A score can compose from the downbeat and fail from an internal cue.</h3>
-              <p>Genuinely mixing qubit sequences exist at arbitrary finite length—and as an explicit infinite sequence—that agree with stepwise statistics at every prefix from the opening boundary, yet fail when the unchanged continuation is restarted from an internal boundary.</p>
+              <h3>A score can compose from its entrance cue and fail from an internal cue.</h3>
+              <p>Genuinely mixing qubit sequences exist at arbitrary finite length—and as an explicit infinite sequence—that agree with stepwise statistics at every prefix from the opening boundary, yet fail when the unchanged continuation begins from a fresh context-basis preparation at an internal boundary.</p>
             </div>
           </article>
 
@@ -217,15 +213,15 @@
             <p class="theorem-number">Theorem 5.2</p>
             <div>
               <h3>Musical prediction is quantum-complete.</h3>
-              <p>In the circuit-universal score model, deciding a promised binary musical transition is PromiseBQP-complete under classical polynomial-time reductions. An efficient classical randomized predictor for every promised transition would imply BPP ⊇ BQP. This is not a hardness claim for testing cue stability.</p>
+              <p>Given a polynomial-size quantum circuit, deciding whether a designated output probability lies above an upper input threshold or below a lower one, separated by an inverse-polynomial gap, is PromiseBQP-complete under classical polynomial-time reductions. The circuit size grows with the input; the theorem applies equally to musical labels and ordinary machine output symbols. An efficient classical randomized solver for all promised instances would imply BQP = BPP.</p>
             </div>
           </article>
 
           <article class="theorem-result">
-            <p class="theorem-number">Theorem H.2</p>
+            <p class="theorem-number">Theorem D.4</p>
             <div>
               <h3>The disturbance bound is universal and sharp.</h3>
-              <p>The normalized Born-composition defect satisfies 0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) ≤ 1 in every finite dimension. Inverse complex-Hadamard pairs attain the maximum.</p>
+              <p>The normalized magnitude of the Born-composition defect satisfies 0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) ≤ 1 in every finite dimension. Inverse complex-Hadamard pairs attain the maximum.</p>
             </div>
           </article>
         </div>
@@ -235,36 +231,62 @@
 
       <section class="content-section" id="music" aria-labelledby="music-heading">
         <h2 id="music-heading">Musical demonstrations</h2>
-        <p class="section-intro">The distinction becomes audible when measured circuit outcomes write a score. Both examples belong to the same project.</p>
+        <p class="section-intro">A score prescribes unitary operations; its readout schedule determines the sound holds. Every enabled readout starts the assigned sound anew, even when the pitch repeats. Sounds are classical, but musical rules need not be.</p>
 
-        <article class="resource">
-          <div class="resource-number">1</div>
+        <article class="resource paper-realization" id="qutrit-realization">
+          <div class="resource-number">01</div>
           <div>
-            <h3>A triad &amp; the space between</h3>
-            <p>A measured selector decides whether the sound circuit is checked midway through each passage. A real check plays a new pitch; a skipped check holds the sounding key across the gap.</p>
-            <p><a href="interval-study/">Open the live score →</a></p>
+            <p class="example-label">The paper’s musical example</p>
+            <h3>Three rhythms, one endpoint law</h3>
+            <p>A qutrit chooses among (3), (2,1), and (1,1,1): a three-beat hold, a two-beat hold followed by one beat, or three one-beat holds. Each schedule applies the same U₁, U₂, U₃ and preserves the endpoint distribution.</p>
+            <div class="score-player" aria-label="Five-pass qutrit-selected realization">
+              <div class="score-controls"><button id="qutrit-play" class="primary-play" disabled><span aria-hidden="true">▶</span> Play now</button><button id="qutrit-stop" disabled>Stop</button><label>Tempo <input id="qutrit-tempo" type="number" min="48" max="180" value="108" step="1"> beats/min</label></div>
+              <div id="qutrit-score" class="score-scroll" tabindex="0" role="region" aria-label="Musical score; scroll horizontally on small screens"></div>
+              <p class="mobile-score-hint">Swipe across the score to see all five passes.</p>
+              <p id="qutrit-status" role="status">Loading the realization…</p>
+              <p class="score-detail">Filled note: Δ · open note: 2Δ · dotted open note: 3Δ. Each readout starts its assigned sound anew.</p>
+            </div>
+            <details class="example-details">
+              <summary>How this realization works</summary>
+              <p>The selector outcomes 1, 2, 0, 1, 2 choose five complete passes. Each data pass begins in |00⟩, while the preceding sound is held until the next readout. All three schedules have endpoint probabilities (9,3,3,1)/16 for outcomes 00, 01, 10, 11. Changing the selection probabilities changes the rhythms while preserving this endpoint law.</p>
+              <p>The final readout at 15Δ produces C₄, held until 16Δ, followed by silence until 17Δ. This is the paper’s displayed realization, seed 1766.</p>
+              <p><a href="#qubit-rhythm">See the operations and readout boundaries →</a></p>
+            </details>
           </div>
         </article>
 
         <article class="resource">
-          <div class="resource-number">2</div>
+          <div class="resource-number">02</div>
           <div>
+            <p class="example-label">A continuing E₂–F₂ pulse</p>
             <h3>Qubit Ostinato</h3>
-            <p>An unending, prefix-consistent quantum score. The infinity-chain example turns the same composition question into a continuing rhythm.</p>
-            <p><a href="qubit-ostinato.html">Open Qubit Ostinato →</a></p>
+            <p>An infinite qubit score with a driving, repeating pulse. The player’s λ = −1/2 variant changes pitch with probability 3/4; the paper’s λ = 1/2 realization favors repeated pitches. Both preserve the endpoint distribution of every fully checked prefix from their entrance cue.</p>
+            <p class="play-links"><a class="play-link" href="qubit-ostinato.html">Play Qubit Ostinato <span aria-hidden="true">↗</span></a></p>
+          </div>
+        </article>
+
+        <article class="resource">
+          <div class="resource-number">03</div>
+          <div>
+            <p class="example-label">Explore a two-interval passage</p>
+            <h3>A triad &amp; the space between</h3>
+            <p>A measured selector enables or skips the intermediate readout. An enabled readout starts its assigned pitch; a skipped readout holds the sounding key. Watch the circuit and piano score unfold together, and choose new takes in this separate two-interval example.</p>
+            <p class="play-links"><a class="play-link play-link-secondary" href="interval-study/">Try the live score <span aria-hidden="true">↗</span></a></p>
           </div>
         </article>
       </section>
 
       <section class="content-section" id="video" aria-labelledby="video-heading">
         <h2 id="video-heading">Video demonstration</h2>
-        <p class="section-intro">An eight-note realization showing the selected circuit, changing measurement readouts, the sounding score, and earlier paths fading in time.</p>
+        <p class="section-intro">An eight-readout video of the two-interval example, showing the selector, sound readouts, and earlier paths. The five-pass realization above follows the current paper’s timing.</p>
         <figure>
           <video controls playsinline preload="metadata" poster="quantum-music/figure-4-eight-note-loop-poster.png" aria-label="Eight-note selector-controlled quantum music realization">
             <source src="quantum-music/figure-4-eight-note-loop.mp4" type="video/mp4">
             Your browser cannot play this video. <a href="quantum-music/figure-4-eight-note-loop.mp4" download>Download the MP4</a>.
           </video>
-          <figcaption>Figure 4. Eight-note selector-controlled realization; piano audio, without narration.</figcaption>
+          <figcaption>Two-interval selector example: eight sound events with piano audio, without narration.
+            <span class="play-links video-actions"><a class="play-link" href="interval-study/">Try it yourself <span aria-hidden="true">↗</span></a><a href="#qutrit-realization">Play the paper’s three rhythms ↑</a></span>
+          </figcaption>
         </figure>
       </section>
 
@@ -293,5 +315,6 @@
       <p class="credits">Audio rendering uses <a href="https://github.com/Tonejs/audio/tree/master/salamander">Salamander Grand Piano recordings by Alexander Holm</a>, licensed <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. The recordings render circuit-generated outcomes and do not determine the probability law.</p>
       <p><a href="#top">Back to top ↑</a></p>
     </footer>
+    <script type="module" src="assets/qutrit-score.js"></script>
   </body>
 </html>

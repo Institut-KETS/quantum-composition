@@ -1,0 +1,125 @@
+{
+  "seed": 1766,
+  "beatCount": 17,
+  "finalReadoutBeat": 15,
+  "soundEndBeat": 16,
+  "selectors": [
+    1,
+    2,
+    0,
+    1,
+    2
+  ],
+  "events": [
+    {
+      "event_type": "Y_end",
+      "outcome": 0,
+      "pitch": "C4",
+      "midi": 60,
+      "onset_ticks": 0,
+      "duration_ticks": 3,
+      "selector": 0,
+      "schedule": "(2,1)"
+    },
+    {
+      "event_type": "Y_end",
+      "outcome": 0,
+      "pitch": "C4",
+      "midi": 60,
+      "onset_ticks": 3,
+      "duration_ticks": 1,
+      "selector": 1,
+      "schedule": "(3)"
+    },
+    {
+      "event_type": "Y_1",
+      "outcome": 0,
+      "pitch": "E4",
+      "midi": 64,
+      "onset_ticks": 4,
+      "duration_ticks": 1,
+      "selector": 2,
+      "schedule": "(1,1,1)"
+    },
+    {
+      "event_type": "Y_2",
+      "outcome": 0,
+      "pitch": "G4",
+      "midi": 67,
+      "onset_ticks": 5,
+      "duration_ticks": 1,
+      "selector": 2,
+      "schedule": "(1,1,1)"
+    },
+    {
+      "event_type": "Y_end",
+      "outcome": 0,
+      "pitch": "C4",
+      "midi": 60,
+      "onset_ticks": 6,
+      "duration_ticks": 2,
+      "selector": 2,
+      "schedule": "(1,1,1)"
+    },
+    {
+      "event_type": "Y_2",
+      "outcome": 0,
+      "pitch": "G4",
+      "midi": 67,
+      "onset_ticks": 8,
+      "duration_ticks": 1,
+      "selector": 0,
+      "schedule": "(2,1)"
+    },
+    {
+      "event_type": "Y_end",
+      "outcome": 0,
+      "pitch": "C4",
+      "midi": 60,
+      "onset_ticks": 9,
+      "duration_ticks": 3,
+      "selector": 0,
+      "schedule": "(2,1)"
+    },
+    {
+      "event_type": "Y_end",
+      "outcome": 0,
+      "pitch": "C4",
+      "midi": 60,
+      "onset_ticks": 12,
+      "duration_ticks": 1,
+      "selector": 1,
+      "schedule": "(3)"
+    },
+    {
+      "event_type": "Y_1",
+      "outcome": 0,
+      "pitch": "E4",
+      "midi": 64,
+      "onset_ticks": 13,
+      "duration_ticks": 1,
+      "selector": 2,
+      "schedule": "(1,1,1)"
+    },
+    {
+      "event_type": "Y_2",
+      "outcome": 0,
+      "pitch": "G4",
+      "midi": 67,
+      "onset_ticks": 14,
+      "duration_ticks": 1,
+      "selector": 2,
+      "schedule": "(1,1,1)"
+    },
+    {
+      "event_type": "Y_end",
+      "outcome": 0,
+      "pitch": "C4",
+      "midi": 60,
+      "onset_ticks": 15,
+      "duration_ticks": 1,
+      "selector": 2,
+      "schedule": "(1,1,1)"
+    }
+  ]
+}

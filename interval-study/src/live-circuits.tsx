@@ -60,7 +60,7 @@ export const LiveCircuits = memo(function LiveCircuits({ passage, entrance, fami
   const optionalState = !trace ? 'measurement-pending' : early ? 'measurement-current' : s === 0 ? 'measurement-bypassed' : 'measurement-held';
   const endpointState = trace && !early ? 'measurement-current' : 'measurement-pending';
   const optionalLabel = trace && s === 1 && sourceZ != null ? `Z = |${BASIS[sourceZ]}⟩` : s === 0 ? 'Z = —' : 'Z = ?';
-  return <section className={'live-circuits figure-four-circuit ' + (sounding ? 'circuits-sounding' : '')} aria-label="Figure 4 selector-controlled circuit">
+  return <section className={'live-circuits figure-four-circuit ' + (sounding ? 'circuits-sounding' : '')} aria-label="Two-interval selector-controlled circuit">
     <div className="figure-panel-heading"><span className="figure-letter">(a)</span><span>Selector-controlled circuit</span><span className="figure-panel-detail">{trace ? `readout ${trace.note.index + 1}${sounding ? ' · sounding now' : ''}` : 'ready · outcomes appear with the piano'}</span></div>
     <div key={`banner-${takeSeed}-${soundRun}-${trace?.source.check ?? 'ready'}`} className={'selector-measurement-banner ' + (trace ? 'measurement-revealed measurement-event' : 'measurement-pending')} data-source-run={trace?.source.run} data-next-run={trace?.interval.step} role="status" aria-live="polite" aria-atomic="true">
       <span className="measurement-kicker">RUN MEASUREMENT</span>

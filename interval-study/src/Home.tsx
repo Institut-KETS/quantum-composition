@@ -150,10 +150,10 @@ export default function Home() {
   }
 
   return <main className={'page live-page ' + (VIDEO_CAPTURE ? 'video-capture ' : '') + (VIDEO_CAPTURE && playing ? 'capture-running' : '')}>
-    {VIDEO_CAPTURE && !playing && revealed === 0 && <button className="capture-start" onClick={() => void play()}>Start publication capture</button>}
+    {VIDEO_CAPTURE && !playing && revealed === 0 && <button className="capture-start" onClick={() => void play()}>Start video capture</button>}
     {VIDEO_CAPTURE && !playing && revealed > 0 && <button className="capture-export" onClick={exportCapturedAudio}>Export synchronized audio</button>}
     <header className="masthead"><a href="#score" className="wordmark">QUANTUM MUSIC<span> / INTERVAL STUDY 01</span></a><span className="edition">Four pitches × two durations</span></header>
-    <section className="intro"><h1>A triad &amp; <em>the space between.</em></h1><p className="lede">Watch the circuits write a piano score, one sounding note at a time.</p></section>
+    <section className="intro"><h1>A triad &amp; <em>the space between.</em></h1><p className="lede">Watch a two-interval circuit write a piano score with one- and two-beat holds.</p></section>
     <section className="player sheet-player" id="score" aria-label="Live quantum-generated piano sheet music">
       <div className="player-heading"><h2>The score, as it sounds.</h2><span className="small">{revealed} / {count} notes written · take {currentSeed}{passNumber > 1 ? ' · generation ' + passNumber : ''}</span></div>
       <div className="transport">
@@ -165,8 +165,8 @@ export default function Home() {
         <label className="range-label volume-control">Volume <output>{volume}%</output><input aria-label="Volume" type="range" min="0" max="100" value={volume} onInput={e => { stop(true); setVolume(Number(e.currentTarget.value)); }}/></label>
       </div>
       {error && <p className="error" role="alert">{error}</p>}
-      <section className="figure-four-live" aria-label="Animated Figure 4: a selector-controlled quantum score">
-        <div className="figure-four-title"><span>FIGURE 4 · LIVE</span><span>Selector-controlled realization of a cue-stable two-qubit passage</span></div>
+      <section className="figure-four-live" aria-label="Animated two-interval selector-controlled quantum score">
+        <div className="figure-four-title"><span>TWO INTERVALS · LIVE</span><span>Selector-controlled realization of a cue-stable two-qubit passage</span></div>
         <div className="figure-four-top">
           <LiveCircuits passage={passage} entrance={entrance} family={intervalScore} trace={trace} selectorSamples={selectorSamples} sounding={active >= 0} heldBeat={heldBeat} restartAtEnd={selected === count - 1} takeSeed={currentSeed}/>
           <FigureLaws laws={sheet.laws} passage={passage} entrance={entrance} observed={observedLaw}/>
@@ -175,7 +175,7 @@ export default function Home() {
           <div className="live-score-heading"><div className="figure-panel-heading"><span className="figure-letter">(b)</span><span>Circuit-generated score aligned to the beat ruler</span></div><label className="flow-toggle"><input type="checkbox" checked={showFlow} onChange={e => setShowFlow(e.currentTarget.checked)}/> Live realization paths</label></div>
           <div className="notation-key"><span><NoteSymbol beats={1}/>1 beat</span><span><NoteSymbol beats={2}/>2 beats</span><span className="small">C₄ · E₄ · G₄ · C₅</span></div>
           <SheetMusic notes={heardNotes} selected={selected} playing={playing && !loading} onSelect={setInspected} showFlow={showFlow} totalCount={count} history={history} fadeProgress={fadeProgress}/>
-          {showFlow && <div className="figure-flow-caption"><span className="figure-letter">(d)</span><span>Circuit-sampled score realization · seed {currentSeed}; the publication reference is seed 1985.</span></div>}
+          {showFlow && <div className="figure-flow-caption"><span className="figure-letter">(d)</span><span>Circuit-sampled score realization · seed {currentSeed}; the reference video uses seed 1985.</span></div>}
         </div>
       </section>
       <div className="score-readout" aria-live="off">
@@ -203,16 +203,16 @@ export default function Home() {
     <details className="record"><summary>The played record · {revealed} notes</summary>{revealed ? <div className="record-scroll"><table className="record-table"><thead><tr><th>Note</th><th>Written pitch</th><th>Source check</th><th>Run selector</th><th>Next check</th><th>Onset</th><th>Hold</th><th>Readout probability</th></tr></thead><tbody>{sheet.traces.slice(0, revealed).map(t => <tr key={t.note.index}><td>{t.note.index + 1}</td><td><NoteSymbol beats={t.note.beats}/> {PITCHES[t.note.pitch].label}</td><td>Run {t.source.run} · {t.source.check}</td><td>S = {t.source.selector}</td><td>{t.source.check === 'step' ? 'Mandatory endpoint' : `Run ${t.interval.step} · ${t.interval.input} → S = ${t.controlSelector}`}</td><td>{t.note.onset} beats</td><td>{t.note.beats} {t.note.beats === 1 ? 'beat' : 'beats'}</td><td>{percent(t.source.probabilities[t.note.pitch])}</td></tr>)}</tbody></table></div> : <p className="small">This record fills as the piano plays.</p>}</details>
 
     <details className="technical"><summary>The circuit model, notation, and piano</summary><div className="technical-content">
-      <h3>Figure 4: one circuit controls the other’s checks</h3>
-      <p>Before each two-interval sound run, the selected controller acts on the previous measured selector bit. The publication realization repeats the fixed Vsel operation with Born kernel K(3/4). Its sampled S controls the middle check. Prepare the sound register in |x⟩ and apply A. For S = 1, measure Z, play that pitch, and apply B to the collapsed state |Z⟩. For S = 0, do not measure or sample a middle pitch: B acts on A|x⟩ coherently, while the previous piano key stays held. Both branches measure and play Y at the endpoint.</p>
+      <h3>One circuit controls the other’s checks</h3>
+      <p>Before each two-interval sound run, the selected controller acts on the previous measured selector bit. The default realization repeats the fixed Vsel operation with Born kernel K(3/4). Its sampled S controls the middle check. Prepare the sound register in |x⟩ and apply A. For S = 1, measure Z, play that pitch, and apply B to the collapsed state |Z⟩. For S = 0, do not measure or sample a middle pitch: B acts on A|x⟩ coherently, while the previous piano key stays held. Both branches measure and play Y at the endpoint.</p>
       <p>Write qₛ = |⟨s|Uₖ|b⟩|². The branch laws are Pr(S = 0, Y = y | x,b) = q₀ |⟨y|BA|x⟩|² and Pr(S = 1, Z = z, Y = y | x,b) = q₁ |⟨z|A|x⟩|² |⟨y|B|z⟩|². There is one selector measurement per run, not one per audible note. A middle note lasts one beat until its endpoint; an endpoint note lasts one or two beats according to the next run’s selector.</p>
-      <p>Each block takes one base interval, even when it contains more than one Figure 5 gate. The chosen cut defines A and B. The two full-passage cuts retain the same coherent endpoint law but need not give the same intermediate readouts or sound correlations.</p>
+      <p>Each block takes one base interval, even when it contains more than one sound gate. The chosen cut defines A and B. The two full-passage cuts retain the same coherent endpoint law but need not give the same intermediate readouts or sound correlations.</p>
       <h3>The continuing interval score</h3>
       <div className="formulas"><p>θ = arccos λ · U₁ = Ry(θ) · Uₖ = Rz(αₖ) Rx(θ), k ≥ 2</p><p>tan αₖ = λ<sup>k−1</sup> √(1 − λ²) / √(1 − λ<sup>2(k−1)</sup>)</p><p>Ostinato: λ = 1/2 · Jaws companion: λ = −1/2</p></div>
-      <p>Each Uₖ has Born kernel K(λ) = ½ [[1 + λ, 1 − λ], [1 − λ, 1 + λ]]. Its measured bit carries forward; it is not reset for every sound. The phases depend on gate index, not the measured result. A separate unmeasured-prefix calculation checks 𝓑(Uₖ⋯U₁) = K(λᵏ) = K(λ)ᵏ; it does not supply the sampled duration input.</p>
+      <p>Each Uₖ has Born kernel K(λ) = ½ [[1 + λ, 1 − λ], [1 − λ, 1 + λ]]. Its measured bit carries forward; it is not reset for every sound. The phases depend on gate index, not the measured result. A separate unmeasured-prefix calculation checks Q(Uₖ⋯U₁) = K(λᵏ) = K(λ)ᵏ; it does not supply the sampled duration input.</p>
       {trace && <p>For selector prefix {trace.interval.step}, the coherent probability of outcome 1 is {percent(trace.prefixProbabilities[1])}; the stepwise-checked marginal is {percent(trace.checkedPrefixProbabilities[1])}. Their largest kernel-entry residual is {trace.prefixResidual.toExponential(2)}. These are unconditional prefix marginals, unlike the conditional probabilities above.</p>}
       <p>The interval sequence is prefix-consistent but can fail after an internal restart. This player takes a finite initial segment of the infinite construction; a staff line break is not a restart.</p>
-      <h3>Exact Figure 5 sound gates</h3>
+      <h3>The two-qubit sound gates</h3>
       <p>W = H ⊗ H, Φ(a,b,c) = diag(1, e<sup>iπa</sup>, e<sup>iπb</sup>, e<sup>iπc</sup>), with the first qubit controlling CNOT. Rightmost factors act first.</p>
       <div className="formulas"><p>Q₁ = W Φ(ξ,0,ξ) W Φ(½,0,½) W</p><p>Q₂ = W Φ(−½,½,−1) W Φ(½−ξ,½,−ξ) W</p><p>Q₃ = W Φ(½,0,½) W Φ(η,ζ,ζ−η) W</p><p>U₁ = CNOT Q₁ · U₂ = CNOT Q₂ CNOT · U₃ = CNOT Q₃ CNOT</p></div>
       <p>The sound register is freshly prepared for each run, not each note; a checked run supplies both a middle and an endpoint readout. The held piano pitch is classical output memory, not the next run’s quantum input. Both circuits are simulated with complex amplitudes and reproducible pseudorandom measurement sampling, not quantum hardware.</p>

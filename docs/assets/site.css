@@ -49,16 +49,18 @@ a:focus-visible {
 .skip-link {
   position: fixed;
   z-index: 10;
-  top: 10px;
+  top: -100px;
   left: 10px;
+  clip-path: inset(50%);
   padding: 6px 10px;
   color: white;
   background: #111;
-  transform: translateY(-150%);
+
 }
 
 .skip-link:focus {
-  transform: translateY(0);
+  top: 10px;
+  clip-path: none;
 }
 
 .site-header {
@@ -505,9 +507,13 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   min-height: 34px;
+  margin-right: 4px;
 }
 
 .rhythm-bar span {
+  position: relative;
+  min-height: 48px;
+  text-align: center;
   display: grid;
   place-items: center;
   border-top: 1px solid var(--ink);
@@ -515,6 +521,30 @@ h1 {
   border-bottom: 1px solid var(--ink);
   font-size: 12px;
 }
+
+.rhythm-bar span::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+  z-index: 1;
+}
+
+.score-player { margin: 24px 0 10px; padding: 18px 0; border-top: 1px solid var(--light-rule); border-bottom: 1px solid var(--light-rule); }
+.score-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; font-size: 14px; }
+.score-controls button, .score-controls input { font: inherit; color: var(--ink); background: white; border: 1px solid #a8a8a2; border-radius: 2px; padding: 7px 10px; }
+.score-controls button { cursor: pointer; }
+.score-controls button:disabled { cursor: default; opacity: 0.5; }
+.score-controls input { width: 74px; }
+.score-controls label { display: flex; align-items: center; gap: 7px; }
+.score-scroll { overflow-x: auto; margin: 18px 0; }
+.score-scroll svg { display: block; width: 100%; min-width: 600px; font: 12px Georgia, serif; fill: var(--ink); }
+.score-detail, #qutrit-status { font-size: 14px; line-height: 1.55; }
+.score-detail { color: var(--muted); }
 
 .rhythm-bar span:first-child {
   border-left: 1px solid var(--ink);
@@ -738,4 +768,39 @@ figcaption {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Direct access to the musical examples. */
+[id] { scroll-margin-top: 28px; }
+.play-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.masthead-actions { margin: 30px 0 22px; }
+.play-link, .score-controls .primary-play {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 11px 18px; border: 1px solid var(--ink); border-radius: 2px;
+  background: var(--ink); color: white; font: 600 14px/1.5 var(--sans);
+  text-decoration: none; min-height: 44px;
+}
+.play-link:hover, .score-controls .primary-play:hover { background: #294451; color: white; }
+.play-link-secondary { background: white; color: var(--ink); }
+.play-link-secondary:hover { background: #f3f5f5; color: var(--ink); }
+.resource .example-label { margin-bottom: 7px; color: var(--muted); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.resource .play-links { margin: 20px 0 12px; }
+.paper-realization h3 { font-size: clamp(24px, 3vw, 30px); }
+.example-details { margin: 18px 0 14px; }
+.example-details summary { cursor: pointer; color: var(--link); font-size: 14px; padding: 8px 0; }
+.example-details[open] summary { margin-bottom: 10px; }
+.example-details p { font-size: 15px; }
+.video-actions { margin-top: 18px; font-size: 14px; }
+button:focus-visible, input:focus-visible, summary:focus-visible, .score-scroll:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+@media (max-width: 480px) {
+  .resource { grid-template-columns: 24px minmax(0, 1fr); gap: 12px; }
+  .score-controls { gap: 12px; }
+  .score-controls label { flex-basis: 100%; }
+  .rhythm-row { grid-template-columns: 54px minmax(0, 1fr); gap: 10px; }
+  .rhythm-unitaries { font-size: 13px; overflow-wrap: anywhere; }
+}
+
+.mobile-score-hint { display: none; }
+@media (max-width: 760px) {
+  .resource .mobile-score-hint { display: block; margin-top: -6px; color: var(--muted); font-size: 12px; }
 }
