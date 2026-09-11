@@ -35,6 +35,8 @@ class FrenchPage(HTMLParser):
                 value = 'fr'
             if key in ('aria-label', 'title', 'alt') or (tag == 'meta' and key == 'content' and values.get('name', values.get('property')) in ('description', 'og:title', 'og:description', 'og:image:alt', 'twitter:title', 'twitter:description', 'twitter:image:alt')):
                 value = translate(value)
+            if key in ('href', 'src') or (tag == 'meta' and key == 'content' and values.get('name', values.get('property')) in ('og:image', 'og:image:secure_url', 'twitter:image')):
+                value = value.replace('quantum-composition-paradox-en.png', 'quantum-composition-paradox-fr.png')
             if key in ('href', 'src', 'poster'):
                 if value.startswith(('assets/', 'paper/')):
                     value = '../' + value

@@ -198,5 +198,8 @@
   "A circuit-generated piano score in which a measured interval selector controls whether the sound circuit is checked in the middle.": "Une partition de piano produite par un circuit, où un sélecteur mesuré commande la mesure intermédiaire du circuit sonore.",
   "A triad & the space between — Quantum Music": "Un accord de trois sons et l’espace entre eux — Musique quantique",
   "Four pitches and two durations, written and played from coupled quantum-circuit simulations.": "Quatre hauteurs et deux durées, écrites et jouées à partir de simulations de circuits quantiques couplés.",
-  "HTML · standalone": "HTML · version autonome"
+  "HTML · standalone": "HTML · version autonome",
+  "Starting at A, intermediate and endpoint measurements agree; starting fresh at B, they can disagree for the same remaining operations.": "Depuis A, les mesures intermédiaires et finales concordent ; après une nouvelle préparation en B, elles peuvent diverger pour les mêmes opérations restantes.",
+  "Agreement from the start can fail after fresh preparation at a later cue.": "L’accord depuis le début peut échouer après une nouvelle préparation à un repère ultérieur.",
+  "View the full-size illustration.": "Voir l’illustration en grand."
 }

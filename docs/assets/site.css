@@ -804,3 +804,17 @@ button:focus-visible, input:focus-visible, summary:focus-visible, .score-scroll:
 @media (max-width: 760px) {
   .resource .mobile-score-hint { display: block; margin-top: -6px; color: var(--muted); font-size: 12px; }
 }
+
+.paradox-illustration {
+  margin: 0 0 32px;
+}
+
+.paradox-illustration > a {
+  display: block;
+}
+
+.paradox-illustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
