@@ -1,3 +1,4 @@
+import { assetRoot } from '../i18n';
 import { PITCHES } from './sheet.ts';
 import type { WrittenNote } from './sheet';
 import { scoreTakeAt } from './live.ts';
@@ -27,7 +28,7 @@ export class PianoAudio {
   async load() {
     if (this.buffers.length === PITCHES.length) return;
     if (!this.loading) this.loading = Promise.all(PITCHES.map(async pitch => {
-      const response = await fetch(import.meta.env.BASE_URL + 'piano/' + pitch.sample + '.mp3');
+      const response = await fetch(assetRoot + 'piano/' + pitch.sample + '.mp3');
       if (!response.ok) throw new Error('Piano sample could not load');
       return this.context.decodeAudioData(await response.arrayBuffer());
     })).then(buffers => { this.buffers = buffers; }).catch(error => { this.loading = null; throw error; });

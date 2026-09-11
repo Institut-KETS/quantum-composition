@@ -1,0 +1,11 @@
+.language-switch { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font: 650 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.language-switch a { color: inherit; text-decoration: none; }
+.language-switch a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
+.language-switch a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.language-switch span { color: #767676; }
+.header-tools { display: flex; align-items: center; gap: 20px; }
+.site-header nav.language-switch { flex-wrap: nowrap; gap: 8px; }
+.site-header nav.language-switch a { margin: 0; }
+.site-header nav.language-switch span { display: inline; }
+.cookbook-nav .language-switch { margin-left: auto; }
+@media (max-width: 720px) { .header-tools { flex: 0 0 auto; flex-direction: column; align-items: flex-end; gap: 8px; } }

@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Qubit Ostinato: an interactive infinite prefix-consistent quantum score for the Quantum Composition project.">
+  <meta name="description" content="Qubit Ostinato : une partition quantique infinie interactive, compatible sur tous ses préfixes, pour le projet Composition quantique.">
   <meta name="theme-color" content="#111111">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Qubit Ostinato">
-  <meta property="og:description" content="An interactive infinite prefix-consistent quantum score.">
+  <meta property="og:description" content="Une partition quantique infinie interactive, compatible sur tous ses préfixes.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Qubit Ostinato">
-  <meta name="twitter:description" content="An interactive infinite prefix-consistent quantum score.">
-  <title>Qubit Ostinato — the infinity chain</title>
-  <link rel="stylesheet" href="assets/ostinato-shell.css">
+  <meta name="twitter:description" content="Une partition quantique infinie interactive, compatible sur tous ses préfixes.">
+  <title>Qubit Ostinato — la chaîne infinie</title>
+  <link rel="stylesheet" href="../assets/ostinato-shell.css">
   <style>
     :root {
       --ink: #111111;
@@ -394,44 +394,44 @@
 <link rel="alternate" hreflang="en" href="https://institut-kets.github.io/quantum-composition/qubit-ostinato.html">
     <link rel="alternate" hreflang="fr" href="https://institut-kets.github.io/quantum-composition/fr/qubit-ostinato.html">
     <link rel="alternate" hreflang="x-default" href="https://institut-kets.github.io/quantum-composition/qubit-ostinato.html">
-    <link rel="stylesheet" href="assets/language.css">
-    <script defer src="assets/language.js"></script>
-  <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/qubit-ostinato.html">
+    <link rel="stylesheet" href="../assets/language.css">
+    <script defer src="../assets/language.js"></script>
+  <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/fr/qubit-ostinato.html">
 </head>
 <body id="top">
-  <a class="skip-link" href="#main">Skip to demonstration</a>
+  <a class="skip-link" href="#main">Aller à la démonstration</a>
   <main>
-    <nav class="cookbook-nav" aria-label="Quantum music demonstrations">
-      <a href="index.html">Quantum Composition</a>
+    <nav class="cookbook-nav" aria-label="Démonstrations de musique quantique">
+      <a href="index.html">Composition quantique</a>
       <a href="qubit-ostinato.html" aria-current="page">Qubit Ostinato</a>
-      <a href="index.html#files">Project resources</a><span role="group" class="language-switch" aria-label="Language"><a data-language="en" lang="en" hreflang="en" href="qubit-ostinato.html" aria-current="page">EN</a><span aria-hidden="true">|</span><a data-language="fr" lang="fr" hreflang="fr" href="fr/qubit-ostinato.html">FR</a></span>
+      <a href="index.html#files">Ressources du projet</a><span role="group" class="language-switch" aria-label="Langue"><a data-language="en" lang="en" hreflang="en" href="../qubit-ostinato.html">EN</a><span aria-hidden="true">|</span><a data-language="fr" lang="fr" hreflang="fr" href="qubit-ostinato.html" aria-current="page">FR</a></span>
     </nav>
     <header id="main">
-      <p class="eyebrow">The quantum music paradox</p>
+      <p class="eyebrow">Le paradoxe de la musique quantique</p>
       <h1>Qubit Ostinato</h1>
-      <p class="deck">The familiar E–F semitone becomes an infinite quantum score. This alternating λ = −1/2 variant switches pitch with probability 3/4; the paper’s λ = 1/2 realization switches with probability 1/4. Both preserve the stepwise endpoint law of every finite prefix.</p>
+      <p class="deck">Le demi-ton familier E–F devient une partition quantique infinie. Cette variante alternante λ = −1/2 change de hauteur avec probabilité 3/4 ; la réalisation λ = 1/2 de l’article change avec probabilité 1/4. Toutes deux préservent la loi finale étape par étape de chaque préfixe fini.</p>
     </header>
 
-    <section class="two-col" aria-label="Qubit Ostinato infinity-chain player">
+    <section class="two-col" aria-label="Lecteur de la chaîne infinie Qubit Ostinato">
       <div class="controls">
         <div class="current-box">
-          <div class="current-heading"><span>Every finite prefix</span><strong>target: ν<sub>F,k</sub> = 0</strong></div>
-          <div class="current-size">current ν<sub>F,k</sub> = <output id="current">0</output></div>
+          <div class="current-heading"><span>Chaque préfixe fini</span><strong>cible : ν<sub>F,k</sub> = 0</strong></div>
+          <div class="current-size">valeur actuelle ν<sub>F,k</sub> = <output id="current">0</output></div>
           <div class="readout">
-            <div><span>prefix</span><strong id="prefix">ready</strong></div>
-            <div><span>mixing λ<sub>k</sub></span><strong>−1/2</strong></div>
-            <div><span>prefix product</span><strong id="product">1</strong></div>
+            <div><span>préfixe</span><strong id="prefix">prêt</strong></div>
+            <div><span>mélange λ<sub>k</sub></span><strong>−1/2</strong></div>
+            <div><span>produit du préfixe</span><strong id="product">1</strong></div>
           </div>
-          <p class="current-detail" id="detail">Ready: the first Qubit Ostinato note lies on the zero set.</p>
+          <p class="current-detail" id="detail">Prêt : la première note de Qubit Ostinato appartient à l’ensemble des zéros du défaut.</p>
         </div>
-        <button id="play" type="button" aria-pressed="false">▶ Play forever</button>
-        <p class="status" id="status" aria-live="polite">Each playback samples a new E–F trajectory while the quantum prefix follows the green Born target.</p>
+        <button id="play" type="button" aria-pressed="false">▶ Écouter sans fin</button>
+        <p class="status" id="status" aria-live="polite">Chaque écoute échantillonne une nouvelle trajectoire E–F, tandis que le préfixe quantique suit la cible de Born en vert.</p>
       </div>
 
       <div class="sphere-wrap">
-        <svg class="sphere" viewBox="0 0 440 330" role="img" aria-labelledby="sphere-title sphere-desc">
-          <title id="sphere-title">Qubit Ostinato infinity chain on a Bloch sphere</title>
-          <desc id="sphere-desc">The blue accumulated quantum prefix meets the green stochastic target latitude while the red next unitary note is selected from the zero set.</desc>
+        <svg class="sphere" viewbox="0 0 440 330" role="img" aria-labelledby="sphere-title sphere-desc">
+          <title id="sphere-title">La chaîne infinie Qubit Ostinato sur une sphère de Bloch</title>
+          <desc id="sphere-desc">Le préfixe quantique accumulé, en bleu, rejoint la latitude cible stochastique en vert, tandis que la note unitaire suivante, en rouge, est choisie dans l’ensemble des zéros du défaut.</desc>
           <circle class="shell" cx="220" cy="155" r="115"></circle>
           <ellipse class="equator" cx="220" cy="155" rx="115" ry="39"></ellipse>
           <line class="axis" x1="110" y1="195" x2="330" y2="115"></line>
@@ -445,9 +445,9 @@
           <circle class="point prefix" id="prefix-point" cx="220" cy="40" r="7"></circle>
         </svg>
         <div class="sphere-legend">
-          <span><i></i>quantum prefix</span>
-          <span class="note-key"><i></i>next unitary note</span>
-          <span class="target-key"><i></i>stochastic target</span>
+          <span><i></i>préfixe quantique</span>
+          <span class="note-key"><i></i>note unitaire suivante</span>
+          <span class="target-key"><i></i>cible stochastique</span>
         </div>
         <div class="coordinates">
           <span><b>r</b><sub>k</sub> = <strong id="prefix-coordinates">(0, 0, 1)</strong></span>
@@ -456,14 +456,14 @@
       </div>
     </section>
 
-    <div class="trajectory" id="trajectory" aria-label="The eight most recent Qubit Ostinato sounds"></div>
-    <div class="trajectory-key"><span><i></i>outcome 0 — E2</span><span class="f-key"><i></i>outcome 1 — F2</span></div>
+    <div class="trajectory" id="trajectory" aria-label="Les huit sons les plus récents de Qubit Ostinato"></div>
+    <div class="trajectory-key"><span><i></i>résultat 0 — E2</span><span class="f-key"><i></i>résultat 1 — F2</span></div>
 
     <section class="flow" aria-labelledby="flow-heading">
-      <div class="flow-head"><h2 id="flow-heading">Born-flow score — eight-note windows</h2><span>Qubit Ostinato keeps playing</span></div>
-      <svg class="flow-canvas" viewBox="0 0 920 290" role="img" aria-labelledby="flow-title flow-desc">
-        <title id="flow-title">Eight-step Born-flow score for Qubit Ostinato</title>
-        <desc id="flow-desc">Each eight-note window deposits one sampled path across eight E and F columns.</desc>
+      <div class="flow-head"><h2 id="flow-heading">Trajectoires de Born — fenêtres de huit notes</h2><span>Qubit Ostinato continue</span></div>
+      <svg class="flow-canvas" viewbox="0 0 920 290" role="img" aria-labelledby="flow-title flow-desc">
+        <title id="flow-title">Trajectoire de Born en huit étapes pour Qubit Ostinato</title>
+        <desc id="flow-desc">Chaque fenêtre de huit notes ajoute une trajectoire échantillonnée à travers huit colonnes E et F.</desc>
         <g id="flow-lines"></g>
         <text class="time-label" x="70" y="28" text-anchor="middle">U1</text>
         <text class="time-label" x="180" y="28" text-anchor="middle">U2</text>
@@ -486,22 +486,22 @@
         <text class="state-label" x="868" y="86">E</text>
         <text class="state-label" x="868" y="228">F</text>
       </svg>
-      <p class="flow-count" id="flow-count">No eight-note paths yet.</p>
+      <p class="flow-count" id="flow-count">Aucune trajectoire de huit notes pour l’instant.</p>
     </section>
 
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>Quantum Composition · Interactive research demonstration</p>
-      <nav aria-label="Footer navigation">
-        <a href="index.html">Project home</a>
-        <a href="https://github.com/Institut-KETS/quantum-composition" target="_blank" rel="noopener noreferrer">Project source ↗</a>
-        <a href="#top">Back to top ↑</a>
+      <p>Composition quantique · Démonstration de recherche interactive</p>
+      <nav aria-label="Navigation de bas de page">
+        <a href="index.html">Accueil du projet</a>
+        <a href="https://github.com/Institut-KETS/quantum-composition" target="_blank" rel="noopener noreferrer">Code source du projet ↗</a>
+        <a href="#top">Retour en haut ↑</a>
       </nav>
     </div>
   </footer>
 
-  <script type="module" src="assets/ostinato.js"></script>
+  <script type="module" src="../assets/ostinato.js"></script>
 </body>
 </html>

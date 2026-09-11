@@ -436,3 +436,15 @@ body:has(.video-capture) { margin:0; overflow:hidden; background:#fffefa; }
 .video-capture .note-flow { margin-bottom:2px; }
 .capture-start,.capture-export { position:fixed; inset:0; z-index:50; margin:auto; width:250px; height:54px; border-color:#176345; background:#173f33; color:white; font-size:14px; }
 .capture-start:hover,.capture-export:hover { background:#245746; }
+.demo-navigation { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); font-size:12px; }
+.demo-navigation a { color:var(--ink); text-decoration:none; }
+.demo-navigation a:hover { text-decoration:underline; }
+.language-switch { display:inline-flex; align-items:center; gap:10px; white-space:nowrap; font-size:13px; font-weight:650; }
+.language-switch a + a::before { content:'|'; display:inline-block; margin-right:10px; color:var(--muted); font-weight:400; }
+.language-switch a[aria-current="page"] { text-decoration:underline; text-underline-offset:4px; }
+.demo-navigation a:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+@media(max-width:600px) {
+  .live-page .empty-score .staff { min-width:0; min-height:190px; }
+  .empty-score .staff p { top:118px; left:16px; right:16px; }
+  .empty-flow { margin-left:16px; margin-right:16px; }
+}

@@ -24,6 +24,25 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory docs
 
 To rebuild the interval study, run `npm install` and then `npm run build` from `interval-study/`. The build writes to `docs/interval-study/`.
 
+## English and French
+
+The [French site](https://institut-kets.github.io/quantum-composition/fr/) has its own addresses. Language links retain section anchors. Both languages use the same simulation, recordings, equations, and random seeds; the published paper and reference video retain their English annotations.
+
+Static translations are in `scripts/translations/fr-static.json`; the music interface translations are in `interval-study/src/fr.json`. After editing either language or the music interface, rebuild in this order:
+
+```sh
+cd interval-study
+npm ci
+npm run check
+npm run build
+cd ..
+python3 scripts/build-french.py
+node interval-study/scripts/build-standalone.mjs
+python3 scripts/package-downloads.py
+```
+
+The French player shares the hosted application bundle and piano files. Each language also has a self-contained HTML download and ZIP; their EN / FR switches work offline.
+
 ## Paper and citation
 
 Jacob Biamonte. *The Quantum Composition Paradox*. arXiv:2609.11402 [quant-ph] (2026).

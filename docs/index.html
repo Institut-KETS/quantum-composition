@@ -30,6 +30,11 @@
     <title>The Quantum Composition Project</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/site.css?v=8">
+  <link rel="alternate" hreflang="en" href="https://institut-kets.github.io/quantum-composition/">
+    <link rel="alternate" hreflang="fr" href="https://institut-kets.github.io/quantum-composition/fr/">
+    <link rel="alternate" hreflang="x-default" href="https://institut-kets.github.io/quantum-composition/">
+    <link rel="stylesheet" href="assets/language.css">
+    <script defer src="assets/language.js"></script>
   </head>
   <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -50,7 +55,7 @@
         <span aria-hidden="true">|</span>
         <a href="#paper">Paper</a>
       </nav>
-      <a class="github-link" href="https://github.com/Institut-KETS/quantum-composition">GitHub</a>
+      <div class="header-tools"><a class="github-link" href="https://github.com/Institut-KETS/quantum-composition">GitHub</a><nav class="language-switch" aria-label="Language"><a data-language="en" lang="en" hreflang="en" href="index.html" aria-current="page">EN</a><span aria-hidden="true">|</span><a data-language="fr" lang="fr" hreflang="fr" href="fr/index.html">FR</a></nav></div>
     </header>
 
     <main id="main" class="frame">
@@ -300,7 +305,7 @@
         <ul class="file-list">
           <li><a href="https://arxiv.org/pdf/2609.11402">Read the paper</a> <span>PDF · arXiv:2609.11402</span></li>
           <li><a href="paper/citation.bib" download>Paper citation</a> <span>BibTeX</span></li>
-          <li><a href="quantum-music/quantum-music-interval-study.html" download>Standalone interactive example</a> <span>HTML · 664 KB</span></li>
+          <li><a href="quantum-music/quantum-music-interval-study.html" download>Standalone interactive example</a> <span>HTML · standalone</span></li>
           <li><a href="quantum-music/quantum-music-interval-study-supplement.zip" download>Complete supplement</a> <span>ZIP · 12 MB</span></li>
           <li><a href="quantum-music/figure-4-eight-note-loop.mp4" download>Eight-note loop</a> <span>MP4 · 5.9 MB</span></li>
           <li><a href="quantum-music/figure-4-eight-note-loop.mov" download>QuickTime master</a> <span>MOV · 5.9 MB</span></li>
@@ -323,6 +328,6 @@
       <p class="credits">Audio rendering uses <a href="https://github.com/Tonejs/audio/tree/master/salamander">Salamander Grand Piano recordings by Alexander Holm</a>, licensed <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. The recordings render circuit-generated outcomes and do not determine the probability law.</p>
       <p><a href="#top">Back to top ↑</a></p>
     </footer>
-    <script type="module" src="assets/qutrit-score.js"></script>
+    <script type="module" src="assets/qutrit-score.js?v=9"></script>
   </body>
 </html>

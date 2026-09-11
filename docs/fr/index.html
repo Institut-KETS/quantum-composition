@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Le projet Composition quantique : pourquoi les probabilités de transition quantiques ne se composent pas toujours, et comment cet échec devient audible.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="citation_title" content="The Quantum Composition Paradox">
+    <meta name="citation_author" content="Biamonte, Jacob">
+    <meta name="citation_publication_date" content="2026/09/10">
+    <meta name="citation_arxiv_id" content="2609.11402">
+    <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2609.11402">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://institut-kets.github.io/quantum-composition/fr/">
+    <meta property="og:title" content="Le projet Composition quantique">
+    <meta property="og:description" content="La théorie quantique prédit des musiques qui ne se composent pas. Nous classifions les cas où elles se composent.">
+    <meta property="og:site_name" content="Quantum Composition">
+    <meta property="og:image" content="https://institut-kets.github.io/quantum-composition/assets/quantum-composition-share.png">
+    <meta property="og:image:secure_url" content="https://institut-kets.github.io/quantum-composition/assets/quantum-composition-share.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Une partition illustrée compare un passage quantique joué depuis le début au même passage commencé à un repère interne.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Le projet Composition quantique">
+    <meta name="twitter:description" content="La théorie quantique prédit des musiques qui ne se composent pas. Nous classifions les cas où elles se composent.">
+    <meta name="twitter:image" content="https://institut-kets.github.io/quantum-composition/assets/quantum-composition-share.png">
+    <meta name="twitter:image:alt" content="Une partition illustrée compare un passage quantique joué depuis le début au même passage commencé à un repère interne.">
+    <link rel="canonical" href="https://institut-kets.github.io/quantum-composition/fr/">
+    <title>Le projet Composition quantique</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/site.css?v=8">
+  <link rel="alternate" hreflang="en" href="https://institut-kets.github.io/quantum-composition/">
+    <link rel="alternate" hreflang="fr" href="https://institut-kets.github.io/quantum-composition/fr/">
+    <link rel="alternate" hreflang="x-default" href="https://institut-kets.github.io/quantum-composition/">
+    <link rel="stylesheet" href="../assets/language.css">
+    <script defer src="../assets/language.js"></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Aller au contenu</a>
+
+    <header class="site-header frame">
+      <nav aria-label="Navigation principale">
+        <a class="home-link" href="#top">Composition quantique</a>
+        <span aria-hidden="true">|</span>
+        <a href="#paradox">Le paradoxe</a>
+        <span aria-hidden="true">|</span>
+        <a href="#theorems">Théorèmes</a>
+        <span aria-hidden="true">|</span>
+        <a href="#music">Musique</a>
+        <span aria-hidden="true">|</span>
+        <a href="#video">Vidéo</a>
+        <span aria-hidden="true">|</span>
+        <a href="#files">Téléchargements</a>
+        <span aria-hidden="true">|</span>
+        <a href="#paper">Article</a>
+      </nav>
+      <div class="header-tools"><a class="github-link" href="https://github.com/Institut-KETS/quantum-composition">GitHub</a><nav class="language-switch" aria-label="Langue"><a data-language="en" lang="en" hreflang="en" href="../index.html">EN</a><span aria-hidden="true">|</span><a data-language="fr" lang="fr" hreflang="fr" href="index.html" aria-current="page">FR</a></nav></div>
+    </header>
+
+    <main id="main" class="frame">
+      <section class="masthead" aria-labelledby="project-title">
+        <p class="section-label">Lois de composition en théorie quantique</p>
+        <h1 id="project-title">Le paradoxe de la composition quantique</h1>
+        <p class="subtitle">La théorie quantique prédit des musiques qui ne se composent pas. Nous classifions les cas où elles se composent en utilisant la mesure pour tester la compatibilité de la composition aux frontières temporelles.</p>
+        <p class="byline"><a rel="author" href="https://profs.etsmtl.ca/jbiamonte/index.html">Jacob Biamonte</a> · ÉTS, Université du Québec</p>
+        <p class="introduction">Les probabilités de transition quantiques — la probabilité qu’un résultat succède à un autre — ne se multiplient pas comme les probabilités classiques. Mesurer un processus quantique étape par étape peut modifier les statistiques prédites à son extrémité. Nous classifions exactement les cas où les statistiques étape par étape et à l’extrémité coïncident, et introduisons le courant de Born–Chapman–Kolmogorov pour mesurer leur écart.</p>
+        <div class="play-links masthead-actions"><a class="play-link" href="#qutrit-realization">Écouter les trois rythmes <span aria-hidden="true">↓</span></a><a class="play-link play-link-secondary" href="qubit-ostinato.html">Écouter Qubit Ostinato <span aria-hidden="true">↗</span></a></div>
+        <p class="project-links"><a href="https://arxiv.org/abs/2609.11402">arXiv:2609.11402</a> · <a href="https://arxiv.org/pdf/2609.11402">Article en anglais (PDF)</a> · <a href="#music">Démonstrations musicales</a> · <a href="https://github.com/Institut-KETS/quantum-composition">Projet sur GitHub</a></p>
+      </section>
+
+      <section class="content-section" id="paradox" aria-labelledby="paradox-heading">
+        <h2 id="paradox-heading">Le paradoxe</h2>
+        <div class="prose">
+          <p><strong>Le problème.</strong> Les mesures intermédiaires effacent les interférences. Les probabilités déduites étape par étape peuvent donc différer de la distribution des résultats finaux.</p>
+          <p><strong>La question.</strong> Quand peut-on mesurer une suite d’opérations quantiques à chaque étape intermédiaire sans modifier la distribution des résultats finaux ? Jusqu’à quel point cette propriété peut-elle échouer ?</p>
+          <p><strong>Le résultat.</strong> Pour une famille fermée par composition, la composition est universellement valide si et seulement si chaque opération est une permutation munie de phases — l’analogue quantique d’un processus déterministe réversible. Les suites prescrites peuvent être plus riches : elles peuvent se composer depuis leur frontière initiale, mais échouer lorsque les opérations restantes, inchangées, sont appliquées à un état nouvellement préparé à une frontière interne. Nous quantifions cet échec et démontrons des bornes optimales. Par ailleurs, la prédiction sous promesse des probabilités de sortie de circuits quantiques généraux est PromiseBQP-complète.</p>
+          <p><strong>La conséquence musicale.</strong> Les opérations unitaires sont des notes et les frontières temporelles sont des repères. Une application de sortie classique associe des sons aux résultats enregistrés. Les instants de lecture donnent le rythme, et la composition des noyaux de Born détermine quels rythmes préservent la distribution finale. Le test étape par étape peut réussir depuis le repère d’entrée et échouer après une nouvelle préparation à un repère interne.</p>
+        </div>
+        <section class="composition-guide" aria-labelledby="composition-heading">
+          <h3 id="composition-heading">Comment tester la composition</h3>
+          <p>Pour une opération unitaire <i>U</i>, le noyau de Born <span class="born-q">Q</span>(<i>U</i>) donne ses probabilités de transition dans une base de mesure fixée :</p>
+          <p class="display-math"><span class="born-q">Q</span>(<i>U</i>)<sub><i>yx</i></sub> = |⟨<i>y</i>|<i>U</i>|<i>x</i>⟩|².</p>
+
+          <figure class="commuting-figure">
+            <div class="diagram-scroll">
+              <svg class="commuting-diagram" viewbox="0 0 760 315" role="img" aria-labelledby="diagram-title diagram-desc">
+                <title id="diagram-title">Le diagramme de composition quantique–stochastique</title>
+                <desc id="diagram-desc">À partir de U et V, le chemin de gauche compose les unitaires, puis applique l’application de Born. Celui de droite applique d’abord l’application de Born à chaque unitaire, puis compose les noyaux stochastiques obtenus. Le diagramme commute lorsque les deux résultats du bas coïncident.</desc>
+                <defs>
+                  <marker id="arrowhead" markerwidth="8" markerheight="8" refx="7" refy="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                  </marker>
+                </defs>
+                <text class="diagram-math" x="380" y="30" text-anchor="middle">(<tspan font-style="italic">U</tspan>, <tspan font-style="italic">V</tspan>)</text>
+                <text class="diagram-heading" x="165" y="72" text-anchor="middle">Composition quantique</text>
+                <text class="diagram-heading" x="595" y="72" text-anchor="middle">Composition stochastique</text>
+                <path class="diagram-arrow" d="M355 42 L188 108"></path>
+                <path class="diagram-arrow" d="M405 42 L572 108"></path>
+                <text class="diagram-label" x="300" y="70" text-anchor="middle">composer</text>
+                <text class="diagram-label" x="460" y="70" text-anchor="middle">évaluer</text>
+                <text class="diagram-math" x="165" y="132" text-anchor="middle"><tspan font-style="italic">VU</tspan></text>
+                <text class="diagram-math" x="595" y="132" text-anchor="middle">(<tspan class="born-q">Q</tspan>(<tspan font-style="italic">V</tspan>), <tspan class="born-q">Q</tspan>(<tspan font-style="italic">U</tspan>))</text>
+                <path class="diagram-arrow" d="M165 148 L165 224"></path>
+                <path class="diagram-arrow" d="M595 148 L595 224"></path>
+                <text class="diagram-label" x="130" y="190" text-anchor="middle">évaluer</text>
+                <text class="diagram-label" x="632" y="190" text-anchor="middle">composer</text>
+                <text class="diagram-math" x="165" y="258" text-anchor="middle"><tspan class="born-q">Q</tspan>(<tspan font-style="italic">VU</tspan>)</text>
+                <text class="diagram-math" x="595" y="258" text-anchor="middle"><tspan class="born-q">Q</tspan>(<tspan font-style="italic">V</tspan>)<tspan class="born-q">Q</tspan>(<tspan font-style="italic">U</tspan>)</text>
+                <line class="diagram-equals" x1="305" y1="244" x2="455" y2="244"></line>
+                <line class="diagram-equals" x1="305" y1="254" x2="455" y2="254"></line>
+                <text class="diagram-label" x="380" y="292" text-anchor="middle">égaux si et seulement si le diagramme commute</text>
+              </svg>
+            </div>
+            <figcaption>Composer d’abord, puis calculer les probabilités ; ou calculer d’abord les probabilités, puis les composer. Ce sont précisément les interférences quantiques qui peuvent faire diverger ces deux chemins.</figcaption>
+          </figure>
+
+          <section class="current-definition" aria-labelledby="current-heading">
+            <h4 id="current-heading">Le courant de Born–Chapman–Kolmogorov</h4>
+            <p class="display-math">𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>) := <span class="born-q">Q</span>(<i>VU</i>) − <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>).</p>
+            <p>Le courant est la différence signée entre la loi finale cohérente et la loi obtenue par des mesures étape par étape. Une entrée positive représente une probabilité ajoutée à une transition par l’interférence ; une entrée négative, une probabilité retranchée. Chaque colonne a une somme nulle : le courant déplace la probabilité sans en créer.</p>
+            <p>Sa norme de Frobenius normalisée est</p>
+            <p class="display-math">0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) := <span class="math-ratio">1/√(<i>d</i>−1)</span> ‖𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>)‖<sub>F</sub> ≤ 1.</p>
+            <p>Ici, 𝒞 désigne la base de mesure fixée et <i>d</i> son nombre de résultats. La valeur 0 signifie que la composition est exacte ; 1 représente l’écart maximal possible, et cette borne est atteinte.</p>
+            <p>Soit <i>S</i> l’indicateur de présence d’une mesure intermédiaire, <i>X</i> l’entrée préparée et <i>Y</i> le résultat final. Le même test de compatibilité admet alors quatre formulations :</p>
+            <p class="equivalence-line">le diagramme commute  ⇔  𝒥<sub>𝒞</sub>(<i>V</i>,<i>U</i>) = 0  ⇔  ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) = 0  ⇔  𝓘(<i>S</i>;<i>Y</i> | <i>X</i>) = 0.</p>
+          </section>
+
+          <section class="cue-explainer" aria-labelledby="cue-heading">
+            <h4 id="cue-heading">La différence tient au point de départ autorisé</h4>
+            <p>Pour les trois premières opérations sur un qubit de l’article, avec le paramètre de mélange λ = 1/2, voici les six passages contigus et leurs tests de composition de Born :</p>
+            <div class="cue-comparison">
+              <article>
+                <p class="cue-name">Compatibilité sur les préfixes</p>
+                <h5>Commencer au repère 0</h5>
+                <div class="passage-line" aria-label="Préparer à la frontière zéro, puis appliquer U1, U2 et U3">
+                  <span class="cue-cell">préparer en 0</span>
+                  <span>U₁</span><span>U₂</span><span>U₃</span>
+                </div>
+                <div class="interval-register" role="table" aria-label="Passages commençant au repère zéro">
+                  <div class="interval-head" role="row"><span role="columnheader">Passage</span><span role="columnheader">Composition de Born</span><span role="columnheader">Test</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">0→1</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₁)</span><span role="cell">automatique</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">0→2</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₂∘<i>U</i>₁) = <span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span><span role="cell">vérifié</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">0→3</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁) = <span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span><span role="cell">vérifié</span></div>
+                </div>
+              </article>
+              <article>
+                <p class="cue-name">Stabilité aux frontières</p>
+                <h5>Recommencer à un repère interne</h5>
+                <div class="passage-stack" aria-label="Préparer un nouvel état aux frontières un et deux">
+                  <div class="passage-line"><span class="cue-cell">préparer en 1</span><span class="blank-step">·</span><span>U₂</span><span>U₃</span></div>
+                  <div class="passage-line"><span class="cue-cell">préparer en 2</span><span class="blank-step">·</span><span class="blank-step">·</span><span>U₃</span></div>
+                </div>
+                <div class="interval-register" role="table" aria-label="Passages commençant à des repères internes">
+                  <div class="interval-head" role="row"><span role="columnheader">Passage</span><span role="columnheader">Composition de Born</span><span role="columnheader">Test</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">1→2</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₂)</span><span role="cell">automatique</span></div>
+                  <div class="interval-row interval-fails" role="row"><strong role="cell">1→3</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂) ≠ <span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)</span><span role="cell">échoue</span></div>
+                  <div class="interval-row" role="row"><strong role="cell">2→3</strong><span role="cell"><span class="born-q">Q</span>(<i>U</i>₃)</span><span role="cell">automatique</span></div>
+                </div>
+              </article>
+            </div>
+            <p class="composition-conclusion">Ici, <span class="born-q">Q</span>(<i>U</i>₁) = <span class="born-q">Q</span>(<i>U</i>₂) = <span class="born-q">Q</span>(<i>U</i>₃) = <i>K</i>(1/2), la loi d’une note qui conserve un résultat avec probabilité 3/4 et le change avec probabilité 1/4. <strong>Le paradoxe.</strong> La partition satisfait tous les tests entièrement étape par étape depuis le repère 0, mais le suffixe inchangé <i>U</i>₃∘<i>U</i>₂ échoue lorsqu’il débute avec une nouvelle préparation au repère 1.</p>
+          </section>
+
+          <section class="rhythm-example" id="qubit-rhythm" aria-labelledby="rhythm-heading">
+            <h4 id="rhythm-heading">Le rythme du qubit : trois calendriers de lecture admissibles</h4>
+            <p>Chaque ligne applique <i>U</i>₁, puis <i>U</i>₂, puis <i>U</i>₃. La durée choisie Δ d’un temps fixe l’intervalle entre deux frontières d’opérations voisines. Les longueurs des blocs indiquent les tenues successives des sons ; un point marque chaque lecture, y compris la dernière. Le son initial est spécifié indépendamment de l’état quantique préparé.</p>
+            <div class="rhythm-table" role="table" aria-label="Calendriers de lecture admissibles du passage à trois étapes sur un qubit de l’article">
+              <div class="rhythm-head" role="row"><span role="columnheader">Calendrier</span><span role="columnheader">Blocs de lecture et facteurs de Born</span><span role="columnheader">Loi finale préservée ?</span></div>
+              <div class="rhythm-row" role="row">
+                <strong role="rowheader">(3)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-3">U₁ → U₂ → U₃<br>3Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃∘<i>U</i>₂∘<i>U</i>₁)</span></div>
+                <span role="cell">admissible</span>
+              </div>
+              <div class="rhythm-row" role="row">
+                <strong role="rowheader">(2,1)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-2">U₁ → U₂<br>2Δ</span><span class="hold-1">U₃<br>Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂∘<i>U</i>₁)</span></div>
+                <span role="cell">admissible</span>
+              </div>
+              <div class="rhythm-row" role="row">
+                <strong role="rowheader">(1,1,1)</strong>
+                <div class="rhythm-realization" role="cell"><div class="rhythm-bar"><span class="hold-1">U₁<br>Δ</span><span class="hold-1">U₂<br>Δ</span><span class="hold-1">U₃<br>Δ</span></div><span class="rhythm-unitaries"><span class="born-q">Q</span>(<i>U</i>₃)<span class="born-q">Q</span>(<i>U</i>₂)<span class="born-q">Q</span>(<i>U</i>₁)</span></div>
+                <span role="cell">admissible</span>
+              </div>
+            </div>
+            <p>L’admissibilité signifie que la distribution finale cohérente est préservée pour toute entrée de la base du contexte, et donc pour tout mélange classique de ces entrées. Le calendrier (1,2), physiquement réalisable, avec des lectures après U₁ puis U₃, ne satisfait pas cette condition. Retirer de (1,1,1) la lecture après U₂ donne (1,2) ; retirer la lecture intermédiaire restante rétablit l’admissibilité sous la forme (3).</p>
+            <p><a href="#qutrit-realization">Écouter ces trois rythmes dans la réalisation à deux qubits de l’article →</a></p>
+          </section>
+        </section>
+      </section>
+
+      <section class="content-section theorem-section" id="theorems" aria-labelledby="theorems-heading">
+        <p class="section-label">Les résultats mathématiques</p>
+        <h2 id="theorems-heading">La musique rend le paradoxe audible.</h2>
+        <p class="theorem-introduction">Cet article donne à la musique quantique une théorie mathématique de la composition : une loi exacte, un paradoxe aux frontières, une limite de capacité optimale et un problème de prédiction complet pour le calcul quantique. La partition rend la loi de composition audible.</p>
+
+        <div class="theorem-list">
+          <article class="theorem-result">
+            <p class="theorem-number">Théorème 2.1</p>
+            <div>
+              <h3>La composition universelle est déterministe.</h3>
+              <p>Pour une famille en dimension finie fermée par composition, <span class="born-q">Q</span>(<i>VU</i>) = <span class="born-q">Q</span>(<i>V</i>)<span class="born-q">Q</span>(<i>U</i>) pour toute paire autorisée si et seulement si chaque opération est une permutation munie de phases. Au niveau des probabilités, les seuls processus quantiques universellement compatibles avec la composition sont des machines à états déterministes réversibles.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Théorème 4.2</p>
+            <div>
+              <h3>Une partition peut se composer depuis son repère d’entrée et échouer depuis un repère interne.</h3>
+              <p>Il existe des suites d’opérations sur un qubit qui mélangent effectivement les états, de toute longueur finie et sous la forme d’une suite infinie explicite. Leurs statistiques coïncident avec celles des mesures étape par étape pour chaque préfixe depuis la frontière initiale, mais cette égalité échoue lorsque la continuation inchangée débute avec un état de la base du contexte nouvellement préparé à une frontière interne.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Théorème 4.3</p>
+            <div>
+              <h3>La stabilité aux repères a une capacité optimale.</h3>
+              <p>En dimension <i>d</i>, une suite stable aux frontières contient au plus <i>d</i> étapes à support plein. La borne est atteinte en toute dimension première : une partition stable aux repères, à <i>d</i> issues, peut contenir exactement <i>d</i> notes à mélange complet.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Théorème 5.2</p>
+            <div>
+              <h3>La prédiction musicale est complète pour le calcul quantique.</h3>
+              <p>Étant donné un circuit quantique de taille polynomiale, décider si une probabilité de sortie désignée dépasse un seuil supérieur fourni en entrée ou se situe sous un seuil inférieur, séparés par un écart inversement polynomial, est PromiseBQP-complet pour les réductions classiques en temps polynomial. La taille du circuit croît avec l’entrée ; le théorème s’applique aussi bien aux étiquettes musicales qu’aux symboles de sortie ordinaires d’une machine. Un algorithme classique probabiliste efficace résolvant toutes les instances satisfaisant la promesse impliquerait BQP = BPP.</p>
+            </div>
+          </article>
+
+          <article class="theorem-result">
+            <p class="theorem-number">Théorème D.4</p>
+            <div>
+              <h3>La borne du défaut est universelle et optimale.</h3>
+              <p>L’amplitude normalisée du défaut de composition de Born vérifie 0 ≤ ν<sub>𝒞</sub>(<i>V</i>,<i>U</i>) ≤ 1 en toute dimension finie. Les paires formées d’une matrice de Hadamard complexe unitaire et de son inverse atteignent le maximum.</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="theorem-coda">Ensemble, ces résultats fondent une théorie de la composition quantique sur des théorèmes : sa limite classique exacte, son échec irréductiblement quantique, sa capacité en dimension finie et sa frontière de calcul.</p>
+      </section>
+
+      <section class="content-section" id="music" aria-labelledby="music-heading">
+        <h2 id="music-heading">Démonstrations musicales</h2>
+        <p class="section-intro">Une partition prescrit des opérations unitaires ; son calendrier de lecture détermine les tenues des sons. Chaque lecture activée redéclenche le son associé, même si la hauteur se répète. Les sons sont classiques, mais les règles musicales ne le sont pas nécessairement.</p>
+
+        <article class="resource paper-realization" id="qutrit-realization">
+          <div class="resource-number">01</div>
+          <div>
+            <p class="example-label">L’exemple musical de l’article</p>
+            <h3>Trois rythmes, une même loi finale</h3>
+            <p>Un qutrit choisit entre (3), (2,1) et (1,1,1) : une tenue de trois temps, une tenue de deux temps suivie d’un temps, ou trois tenues d’un temps. Chaque calendrier applique les mêmes opérations U₁, U₂, U₃ et préserve la distribution finale.</p>
+            <div class="score-player" aria-label="Réalisation en cinq passages sélectionnés par un qutrit">
+              <div class="score-controls"><button id="qutrit-play" class="primary-play" disabled><span aria-hidden="true">▶</span> Écouter</button><button id="qutrit-stop" disabled>Arrêter</button><label>Tempo <input id="qutrit-tempo" type="number" min="48" max="180" value="108" step="1"> temps/min</label></div>
+              <div id="qutrit-score" class="score-scroll" tabindex="0" role="region" aria-label="Partition musicale ; défilement horizontal sur les petits écrans"></div>
+              <p class="mobile-score-hint">Faites défiler la partition horizontalement pour voir les cinq passages.</p>
+              <p id="qutrit-status" role="status">Chargement de la réalisation…</p>
+              <p class="score-detail">Tête pleine : Δ · tête creuse : 2Δ · tête creuse pointée : 3Δ. Chaque lecture redéclenche le son associé.</p>
+            </div>
+            <details class="example-details">
+              <summary>Comment fonctionne cette réalisation</summary>
+              <p>Les résultats du sélecteur 1, 2, 0, 1, 2 choisissent cinq passages complets. Chaque passage du registre de données commence dans |00⟩, tandis que le son précédent est tenu jusqu’à la lecture suivante. Les trois calendriers ont les probabilités finales (9,3,3,1)/16 pour les résultats 00, 01, 10, 11. Modifier les probabilités de sélection change les rythmes tout en préservant cette loi finale.</p>
+              <p>La dernière lecture à 15Δ produit C₄, tenu jusqu’à 16Δ, puis le silence dure jusqu’à 17Δ. C’est la réalisation représentée dans l’article, avec la graine 1766.</p>
+              <p><a href="#qubit-rhythm">Voir les opérations et les frontières de lecture →</a></p>
+            </details>
+          </div>
+        </article>
+
+        <article class="resource">
+          <div class="resource-number">02</div>
+          <div>
+            <p class="example-label">Une pulsation continue E₂–F₂</p>
+            <h3>Qubit Ostinato</h3>
+            <p>Une partition infinie sur un qubit, avec une pulsation répétitive soutenue. La variante λ = −1/2 du lecteur change de hauteur avec probabilité 3/4 ; la réalisation λ = 1/2 de l’article favorise les hauteurs répétées. Toutes deux préservent la distribution finale de chaque préfixe entièrement mesuré depuis son repère d’entrée.</p>
+            <p class="play-links"><a class="play-link" href="qubit-ostinato.html">Écouter Qubit Ostinato <span aria-hidden="true">↗</span></a></p>
+          </div>
+        </article>
+
+        <article class="resource">
+          <div class="resource-number">03</div>
+          <div>
+            <p class="example-label">Explorer un passage à deux intervalles</p>
+            <h3>Un accord de trois sons et l’espace entre eux</h3>
+            <p>Un sélecteur mesuré active ou omet la lecture intermédiaire. Une lecture activée déclenche la hauteur associée ; une lecture omise prolonge la touche qui sonne. Observez le circuit et la partition de piano se dérouler ensemble, et choisissez de nouvelles réalisations dans cet exemple distinct à deux intervalles.</p>
+            <p class="play-links"><a class="play-link play-link-secondary" href="interval-study/">Essayer la partition interactive <span aria-hidden="true">↗</span></a></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-section" id="video" aria-labelledby="video-heading">
+        <h2 id="video-heading">Démonstration vidéo</h2>
+        <p class="section-intro">Une vidéo de huit lectures de l’exemple à deux intervalles montre le sélecteur, les lectures sonores et les trajectoires précédentes. La réalisation en cinq passages ci-dessus suit la chronologie de l’article actuel.</p>
+        <figure>
+          <video controls playsinline preload="metadata" poster="../quantum-music/figure-4-eight-note-loop-poster.png" aria-label="Réalisation musicale quantique de huit notes contrôlée par un sélecteur">
+            <source src="../quantum-music/figure-4-eight-note-loop.mp4" type="video/mp4">
+            Votre navigateur ne peut pas lire cette vidéo. <a href="../quantum-music/figure-4-eight-note-loop.mp4" download>Télécharger le MP4</a>.
+          </video>
+          <figcaption>Exemple à deux intervalles avec sélecteur : huit événements sonores au piano, sans narration. Les annotations de la vidéo sont en anglais.
+            <span class="play-links video-actions"><a class="play-link" href="interval-study/">Essayer <span aria-hidden="true">↗</span></a><a href="#qutrit-realization">Écouter les trois rythmes de l’article ↑</a></span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section" id="files" aria-labelledby="files-heading">
+        <h2 id="files-heading">Téléchargements</h2>
+        <ul class="file-list">
+          <li><a href="https://arxiv.org/pdf/2609.11402">Lire l’article en anglais</a> <span>PDF · arXiv:2609.11402</span></li>
+          <li><a href="../paper/citation.bib" download>Référence de l’article</a> <span>BibTeX</span></li>
+          <li><a href="quantum-music/quantum-music-interval-study.html" download>Exemple interactif autonome</a> <span>HTML · version autonome</span></li>
+          <li><a href="quantum-music/quantum-music-interval-study-supplement.zip" download>Supplément complet</a> <span>ZIP · 12 Mo</span></li>
+          <li><a href="../quantum-music/figure-4-eight-note-loop.mp4" download>Boucle de huit notes</a> <span>MP4 · 5,9 Mo</span></li>
+          <li><a href="../quantum-music/figure-4-eight-note-loop.mov" download>Fichier maître QuickTime</a> <span>MOV · 5,9 Mo</span></li>
+        </ul>
+      </section>
+
+      <section class="content-section" id="paper" aria-labelledby="paper-heading">
+        <h2 id="paper-heading">Article</h2>
+        <div class="paper-entry">
+          <h3 lang="en">The Quantum Composition Paradox</h3>
+          <p>Jacob Biamonte. <a href="https://arxiv.org/abs/2609.11402">arXiv:2609.11402</a> [quant-ph] (2026).</p>
+          <p>Prépublication · Première version : <time datetime="2026-09-10">10 septembre 2026</time>.</p>
+          <p><a href="https://arxiv.org/abs/2609.11402">Lire sur arXiv (en anglais)</a> · <a href="https://arxiv.org/pdf/2609.11402">Article en anglais (PDF)</a> · <a href="../paper/citation.bib" download>Télécharger la référence (BibTeX)</a></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer frame">
+      <p><strong>Composition quantique</strong><br>Jacob Biamonte</p>
+      <p class="credits">Le rendu sonore utilise les <a href="https://github.com/Tonejs/audio/tree/master/salamander">enregistrements Salamander Grand Piano d’Alexander Holm</a>, sous licence <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Les enregistrements rendent audibles les résultats produits par les circuits et ne déterminent pas la loi de probabilité.</p>
+      <p><a href="#top">Retour en haut ↑</a></p>
+    </footer>
+    <script type="module" src="../assets/qutrit-score.js?v=9"></script>
+  </body>
+</html>

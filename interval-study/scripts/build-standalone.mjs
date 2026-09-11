@@ -5,13 +5,12 @@ import { fileURLToPath } from 'node:url';
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repository = path.resolve(scriptDirectory, '../..');
 const site = path.join(repository, 'docs/interval-study');
-const output = path.join(repository, 'artifacts/web/quantum-music-interval-study.html');
 
 const htmlPath = path.join(site, 'index.html');
-let html = await readFile(htmlPath, 'utf8');
+const template = await readFile(htmlPath, 'utf8');
 
-const scriptMatch = html.match(/<script type="module"[^>]+src="([^"]+)"[^>]*><\/script>/);
-const styleMatch = html.match(/<link rel="stylesheet"[^>]+href="([^"]+)"[^>]*>/);
+const scriptMatch = template.match(/<script type="module"[^>]+src="([^"]+)"[^>]*><\/script>/);
+const styleMatch = template.match(/<link rel="stylesheet"[^>]+href="([^"]+)"[^>]*>/);
 if (!scriptMatch || !styleMatch) throw new Error('Built JavaScript or CSS asset was not found in index.html');
 
 const resolveAsset = relative => path.resolve(site, relative);
@@ -25,7 +24,6 @@ for (const name of ['C4', 'C5', 'Ds4', 'Fs4']) {
 }
 const attribution = await readFile(path.join(site, 'piano/ATTRIBUTION.txt'), 'utf8');
 const attributionURL = `data:text/plain;charset=utf-8,${encodeURIComponent(attribution)}`;
-javascript = javascript.replaceAll('./piano/ATTRIBUTION.txt', attributionURL);
 
 const embeddedAudio = JSON.stringify(piano).replaceAll('</script', '<\\/script');
 const embeddedJavaScript = javascript.replaceAll('</script', '<\\/script');
@@ -42,9 +40,12 @@ window.fetch = (input, init) => {
 </script>
 <script type="module">${embeddedJavaScript}</script>`;
 
+for (const language of ['en', 'fr']) {
+let html = language === 'en' ? template : await readFile(path.join(repository, 'docs/fr/interval-study/index.html'), 'utf8');
 html = html
-  .replace(scriptMatch[0], () => loader)
-  .replace(styleMatch[0], () => `<style>${stylesheet}</style>`)
+  .replace(/<script type="module"[^>]+src="[^"]+"[^>]*><\/script>/, () => loader)
+  .replace(/<link rel="stylesheet"[^>]+href="[^"]+"[^>]*>/, () => `<style>${stylesheet}</style>`)
+  .replace('<html ', `<html data-attribution-url="${attributionURL.replaceAll('"', '&quot;')}" `)
   .replace('<meta name="theme-color"', '<meta name="artifact" content="Self-contained interactive supplement" />\n    <meta name="theme-color"');
 
 if (html.includes(scriptMatch[0]) || html.includes(styleMatch[0])) {
@@ -72,6 +73,13 @@ if (moduleContents !== embeddedJavaScript || styleContents !== stylesheet) {
   throw new Error('Embedded application asset changed during HTML assembly');
 }
 
-await mkdir(path.dirname(output), { recursive: true });
-await writeFile(output, html);
-console.log(output);
+const directories = language === 'en'
+  ? ['quantum-music', 'docs/quantum-music']
+  : ['quantum-music/fr', 'docs/fr/quantum-music'];
+for (const directory of directories) {
+  const output = path.join(repository, directory, 'quantum-music-interval-study.html');
+  await mkdir(path.dirname(output), { recursive: true });
+  await writeFile(output, html);
+  console.log(output);
+}
+}
