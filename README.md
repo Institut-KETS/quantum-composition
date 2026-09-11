@@ -4,7 +4,7 @@ Quantum transition probabilities do not generally compose like classical probabi
 
 **Project site:** <https://institut-kets.github.io/quantum-composition/>
 
-**Preprint:** arXiv link forthcoming
+**Preprint:** [The Quantum Composition Paradox — arXiv:2609.11402](https://arxiv.org/abs/2609.11402)
 
 ## Explore
 
@@ -24,9 +24,11 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory docs
 
 To rebuild the interval study, run `npm install` and then `npm run build` from `interval-study/`. The build writes to `docs/interval-study/`.
 
-## Publication status
+## Paper and citation
 
-The manuscript link and full citation will be added after the public arXiv identifier is available.
+Jacob Biamonte. *The Quantum Composition Paradox*. arXiv:2609.11402 [quant-ph] (2026).
+
+The first version is dated 10 September 2026. [Read on arXiv](https://arxiv.org/abs/2609.11402), [read the PDF](https://arxiv.org/pdf/2609.11402), or [download the BibTeX citation](https://institut-kets.github.io/quantum-composition/paper/citation.bib).
 
 ## Audio attribution
 
