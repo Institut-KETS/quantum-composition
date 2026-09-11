@@ -2,6 +2,12 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
+    <script>
+      // The published paper's legacy project link should open at the top.
+      if (location.hash === '#composition-heading') {
+        history.replaceState(history.state, '', location.pathname + location.search);
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Le projet Composition quantique : pourquoi les probabilités de transition quantiques ne se composent pas toujours, et comment cet échec devient audible.">
     <meta name="theme-color" content="#ffffff">
